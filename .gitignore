@@ -10,3 +10,4 @@ build/
 .netlify/
 .wrangler/
 .dev.vars
+deployment-artifacts/

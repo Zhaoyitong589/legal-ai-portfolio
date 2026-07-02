@@ -139,6 +139,7 @@ BASE_PATH=/
 ## 部署
 
 - Vercel：见 [DEPLOYMENT.md](DEPLOYMENT.md)
+- 中国大陆访问备用部署：见 [CHINA_SIMPLE_DEPLOYMENT.md](CHINA_SIMPLE_DEPLOYMENT.md)
 - 自定义域名：见 [CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)
 - Netlify、Cloudflare Pages、GitHub Pages：见 [MIGRATION.md](MIGRATION.md)
 - 备份与恢复：见 [BACKUP.md](BACKUP.md)
