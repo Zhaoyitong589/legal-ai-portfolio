@@ -23,16 +23,29 @@ jobs:
 
       - name: Configure Pages paths
         shell: bash
+        env:
+          CUSTOM_SITE_URL: ${{ vars.SITE_URL }}
+          CUSTOM_BASE_PATH: ${{ vars.BASE_PATH }}
         run: |
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
           OWNER_NAME="${GITHUB_REPOSITORY%/*}"
-          if [[ "$REPO_NAME" == "$OWNER_NAME.github.io" ]]; then
-            echo "BASE_PATH=/" >> "$GITHUB_ENV"
-            echo "SITE_URL=https://$OWNER_NAME.github.io" >> "$GITHUB_ENV"
+
+          if [[ -n "$CUSTOM_BASE_PATH" ]]; then
+            BASE_PATH="$CUSTOM_BASE_PATH"
+          elif [[ "$REPO_NAME" == "$OWNER_NAME.github.io" ]]; then
+            BASE_PATH="/"
           else
-            echo "BASE_PATH=/$REPO_NAME" >> "$GITHUB_ENV"
-            echo "SITE_URL=https://$OWNER_NAME.github.io" >> "$GITHUB_ENV"
+            BASE_PATH="/$REPO_NAME"
           fi
+
+          if [[ -n "$CUSTOM_SITE_URL" ]]; then
+            SITE_URL="$CUSTOM_SITE_URL"
+          else
+            SITE_URL="https://$OWNER_NAME.github.io"
+          fi
+
+          echo "BASE_PATH=$BASE_PATH" >> "$GITHUB_ENV"
+          echo "SITE_URL=$SITE_URL" >> "$GITHUB_ENV"
 
       - name: Setup Node
         uses: actions/setup-node@v4

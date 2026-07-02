@@ -1,9 +1,12 @@
 node_modules/
 dist/
+build/
 .astro/
 .DS_Store
 .env
+.env.*
+!.env.example
 .vercel/
 .netlify/
-
-.vercel
+.wrangler/
+.dev.vars

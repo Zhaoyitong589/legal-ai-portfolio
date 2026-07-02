@@ -1,7 +1,10 @@
 node_modules/
 dist/
+build/
 .astro/
 .git/
 .env
 .env.*
 .netlify/
+.wrangler/
+.dev.vars
