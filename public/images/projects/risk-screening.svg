@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#dce6df"/>
+  <rect x="120" y="90" width="960" height="540" rx="12" fill="#f8f6f0" stroke="#173e36" stroke-width="3"/>
+  <path d="M120 180h960" stroke="#173e36" stroke-width="3"/>
+  <circle cx="170" cy="135" r="12" fill="#bb5b45"/>
+  <circle cx="210" cy="135" r="12" fill="#d7ac55"/>
+  <circle cx="250" cy="135" r="12" fill="#6c947c"/>
+  <rect x="175" y="235" width="270" height="28" rx="4" fill="#173e36"/>
+  <rect x="175" y="290" width="590" height="14" rx="4" fill="#b7c0ba"/>
+  <rect x="175" y="324" width="510" height="14" rx="4" fill="#cbd1cd"/>
+  <rect x="175" y="390" width="850" height="110" rx="8" fill="#f2e2dc" stroke="#bb5b45" stroke-width="2"/>
+  <rect x="205" y="420" width="150" height="18" rx="3" fill="#bb5b45"/>
+  <rect x="205" y="456" width="690" height="12" rx="3" fill="#c9a096"/>
+  <text x="175" y="570" fill="#173e36" font-family="Arial,sans-serif" font-size="24">RISK SCREENING / STRUCTURED WORKFLOW</text>
+</svg>

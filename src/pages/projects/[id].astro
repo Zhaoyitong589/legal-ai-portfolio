@@ -1,0 +1,83 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, withBase } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const media = [
+  {
+    src: project.data.cover,
+    alt: project.data.coverAlt || `${project.data.title}界面截图`,
+    caption: project.data.coverCaption
+  },
+  ...(project.data.screenshots || [])
+];
+---
+
+<BaseLayout title={project.data.title} description={project.data.summary}>
+  <article class="detail-page">
+    <header class="detail-hero shell">
+      <a class="back-link" href={withBase('projects/')}>← 返回项目列表</a>
+      <div class="detail-title-grid">
+        <div>
+          <div class="detail-kicker-row">
+            <p class="kicker">{project.data.eyebrow}</p>
+            <span class="status-group">
+              {project.data.statuses.map((status) => <span class="status-badge" data-status={status}>{status}</span>)}
+            </span>
+          </div>
+          <h1>{project.data.title}</h1>
+        </div>
+        <p class="detail-summary">{project.data.summary}</p>
+      </div>
+      <dl class="detail-meta">
+        {project.data.year && <div><dt>时间</dt><dd>{project.data.year}</dd></div>}
+        <div>
+          <dt>状态</dt>
+          <dd class="status-group">
+            {project.data.statuses.map((status) => <span class="status-badge" data-status={status}>{status}</span>)}
+          </dd>
+        </div>
+        <div><dt>最近更新</dt><dd>{formatDate(project.data.updatedAt)}</dd></div>
+        <div><dt>关键词</dt><dd>{project.data.tags.join(' · ')}</dd></div>
+      </dl>
+    </header>
+    <div class:list={['detail-media-grid', 'shell', { 'has-multiple': media.length > 1 }]}>
+      {media.map((item) => (
+        <figure>
+          <img src={withBase(item.src)} alt={item.alt} />
+          {item.caption && <figcaption>{item.caption}</figcaption>}
+        </figure>
+      ))}
+    </div>
+    <div class="detail-content shell">
+      <aside class="detail-aside">
+        {project.data.externalUrl && (
+          <div class="project-links">
+            <p class="aside-title">项目入口</p>
+            <a class="button primary full" href={project.data.externalUrl} target="_blank" rel="noopener noreferrer">访问在线 Demo ↗</a>
+          </div>
+        )}
+        {project.data.sourceUrl && (
+          <div class="project-links">
+            {!project.data.externalUrl && <p class="aside-title">项目入口</p>}
+            <a class="button quiet full" href={project.data.sourceUrl} target="_blank" rel="noopener noreferrer">查看源代码 ↗</a>
+          </div>
+        )}
+        <div class="risk-box">
+          <strong>使用边界</strong>
+          <p>{project.data.riskNote}</p>
+        </div>
+      </aside>
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

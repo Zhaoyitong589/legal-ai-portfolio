@@ -1,0 +1,256 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const education = [
+  {
+    organization: '西北政法大学',
+    role: '法学本科',
+    date: '2021.09 – 2025.07',
+    description: '系统修读民法、刑法、诉讼法、国际法、知识产权法等核心课程，接受基础法学训练。本科阶段逐渐形成对法律实务、涉外争议解决和法律科技应用的兴趣。'
+  },
+  {
+    organization: '同济大学',
+    role: '法律硕士',
+    date: '即将入学',
+    description: '未来将继续攻读法律硕士，希望在研究生阶段进一步探索人工智能法治、合规科技、法律实务流程改造与法律 AI 工具治理等方向。'
+  }
+];
+
+const practice = [
+  {
+    organization: '上海市宝山区人民法院',
+    role: '刑事庭实习生',
+    date: '2023.07 – 2023.09',
+    description: '通过校园遴选进入法院实习，协助梳理刑事证据，参与庭前准备、庭审旁听和案卷归档等工作。实习中接触案件事实整理、证据材料核对和程序沟通，也更直观地理解了事实识别与证据整理的重要性。'
+  },
+  {
+    organization: '陕西省锐博律师事务所',
+    role: '民事团队实习生',
+    date: '2022.02 – 2022.03',
+    description: '参与公司欠款纠纷、商业保险理赔、酒店注意义务与侵权责任等案件的诉讼支持工作，协助完成证据梳理、事实材料整理和庭审流程跟进，初步理解律师工作中的证据组织、争议焦点提炼和文书核对流程。'
+  }
+];
+
+const arbitration = [
+  {
+    organization: '内地与港澳大学生模拟仲裁比赛 IMAC',
+    role: '团队长',
+    description: '组织团队代表学校参赛，围绕 CISG 框架下的违约责任、损害赔偿和跨境商事仲裁争议进行案件分析、文书写作和团队分工协调，接触跨境交易中的合同成立、履行障碍、损害赔偿和仲裁程序问题。'
+  },
+  {
+    organization: '英文案例分析与 IRAC 训练',
+    role: '案例研习',
+    description: '在交换课程中完成 Murphy v. Steeplechase Amusement Co. 案例报告，并阅读 Liebeck v. McDonald’s Restaurants 等英文案例材料，训练事实、规则、适用和结论之间的论证，以及英文法律材料的基本检索与分析。'
+  }
+];
+
+const writingSamples = [
+  {
+    type: 'IRAC Case Analysis',
+    title: 'Murphy v. Steeplechase Amusement Co.',
+    summary: '在台北大学交换课程《欧美侵权法》中，我使用 IRAC 方法完成该案案例报告，围绕游乐设施伤害中的自甘风险、经营者注意义务与损害归责展开分析。该训练帮助我理解普通法案例中事实、规则、适用与结论之间的论证结构，也强化了英文法律文本阅读和案例定位能力。',
+    work: '英文案例检索与阅读、争点识别、IRAC 结构组织、案例报告写作。',
+    tags: ['IRAC', 'Common Law', 'Tort Law', 'Legal Reasoning', 'English Legal Reading'],
+    availability: 'Writing Sample Available upon Request'
+  },
+  {
+    type: 'IMAC Moot Arbitration',
+    title: 'CISG & Cross-border Sales Dispute',
+    summary: '作为团队长，我参与内地与港澳大学生模拟仲裁比赛，围绕 CISG 框架下的国际货物买卖争议进行案件分析、仲裁文书写作与团队分工协调。案件涉及年度采购协议与具体 PO 的关系、合同成立与生效、履行障碍、损害赔偿及替代采购损失等问题。',
+    work: '案件分析、仲裁文书写作、争议焦点梳理与团队分工协调。',
+    tags: ['CISG', 'Arbitration', 'Cross-border Sales', 'Contract Interpretation', 'Damages'],
+    availability: '完整比赛材料与文书不公开'
+  },
+  {
+    type: 'Litigation Support Experience',
+    title: 'Court & Law Firm Practice',
+    summary: '在法院和律所实习中，我接触证据整理、事实梳理、争议焦点提炼和庭审流程跟进。这些经历让我更直观地意识到，法律工作不仅是规则适用，也高度依赖事实结构化、证据链整理和人工复核，后来也启发了证据整理与工时核算工具原型。',
+    work: '证据整理、事实梳理、争议焦点提炼与庭审流程跟进。',
+    tags: ['Evidence Review', 'Fact Structuring', 'Litigation Support', 'Legal Workflow'],
+    availability: '不展示真实案件文书、证据或当事人信息'
+  }
+];
+
+const skills = [
+  '法律实务场景理解',
+  '证据整理与事实结构化',
+  '涉外交易与仲裁问题意识',
+  '英文法律资料检索与阅读',
+  '法律 AI 工具原型设计',
+  'AI 辅助需求拆解与网页 Demo 搭建',
+  '法律依据可靠性与人工复核意识',
+  '合规风险与流程治理兴趣'
+];
+
+const awards = [
+  '全国大学生电子商务“创新、创意及创业”挑战赛校级一等奖',
+  '院女子篮球队成员 · 新生杯冠军',
+  '校音乐社部长'
+];
+---
+
+<BaseLayout title="Background" description="法学训练、法律实务与跨领域实践，为理解法律 AI 的真实落地场景提供基础。">
+  <header class="page-hero background-hero shell">
+    <p class="kicker">BACKGROUND / EXPERIENCE</p>
+    <h1>Background</h1>
+    <p>法学训练、法律实务与跨领域实践，为我理解法律 AI 的真实落地场景提供了基础。</p>
+    <div class="background-positioning">
+      <span>个人定位</span>
+      <strong>具有法学背景的法律 AI 实践者</strong>
+      <p>关注 AI 工具在法律实务中的可靠落地、风险控制与流程治理。</p>
+    </div>
+  </header>
+
+  <div class="shell background-sections">
+    <section class="background-section" aria-labelledby="education-heading">
+      <header>
+        <span>01</span>
+        <p>Education</p>
+        <h2 id="education-heading">教育背景</h2>
+      </header>
+      <div class="experience-list">
+        {education.map((item) => (
+          <article class="experience-entry">
+            <div class="experience-topline">
+              <h3>{item.organization}<small>{item.role}</small></h3>
+              <time>{item.date}</time>
+            </div>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="background-section" aria-labelledby="qualification-heading">
+      <header>
+        <span>02</span>
+        <p>Legal Qualification</p>
+        <h2 id="qualification-heading">法律资格</h2>
+      </header>
+      <div class="experience-list">
+        <article class="experience-entry qualification-entry">
+          <div class="experience-topline">
+            <h3>国家统一法律职业资格考试<small>A 类法律职业资格证书</small></h3>
+            <span class="qualification-mark">已通过</span>
+          </div>
+          <p>已通过国家统一法律职业资格考试并取得 A 类法律职业资格证书。该经历为后续理解法律责任、程序规则、证据审查与法律实务中的风险边界提供了基础。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="background-section" aria-labelledby="practice-heading">
+      <header>
+        <span>03</span>
+        <p>Legal Practice</p>
+        <h2 id="practice-heading">实务经历</h2>
+      </header>
+      <div class="experience-list">
+        {practice.map((item) => (
+          <article class="experience-entry">
+            <div class="experience-topline">
+              <h3>{item.organization}<small>{item.role}</small></h3>
+              <time>{item.date}</time>
+            </div>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="background-section" aria-labelledby="international-heading">
+      <header>
+        <span>04</span>
+        <p>International & Comparative Law</p>
+        <h2 id="international-heading">涉外与比较法学习</h2>
+      </header>
+      <div class="experience-list">
+        <article class="experience-entry">
+          <div class="experience-topline">
+            <h3>台北大学<small>交换学习</small></h3>
+            <time>2025.02 – 2025.06</time>
+          </div>
+          <p>修读《欧美侵权法》《国际公法》等课程，在英文法课程中使用 IRAC 方法完成案例分析，并通过 Westlaw、LexisNexis 等数据库进行英文案例检索和阅读，拓展对普通法案例分析、比较法和英文法律文本的理解。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="background-section" aria-labelledby="arbitration-heading">
+      <header>
+        <span>05</span>
+        <p>Arbitration & Case Analysis</p>
+        <h2 id="arbitration-heading">仲裁与案例分析</h2>
+      </header>
+      <div class="experience-list">
+        {arbitration.map((item) => (
+          <article class="experience-entry">
+            <div class="experience-topline">
+              <h3>{item.organization}<small>{item.role}</small></h3>
+            </div>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="background-section writing-samples-section" aria-labelledby="writing-samples-heading">
+      <header>
+        <span>06</span>
+        <p>Selected Legal Work</p>
+        <h2 id="writing-samples-heading">法律写作与案例分析</h2>
+      </header>
+      <div class="writing-samples">
+        {writingSamples.map((sample, index) => (
+          <article class="writing-sample-card">
+            <div class="writing-sample-topline">
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <p>{sample.type}</p>
+            </div>
+            <h3>{sample.title}</h3>
+            <p class="writing-sample-summary">{sample.summary}</p>
+            <div class="writing-sample-work">
+              <strong>我的工作</strong>
+              <p>{sample.work}</p>
+            </div>
+            <ul class="writing-sample-tags" aria-label="训练能力">
+              {sample.tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+            <p class="writing-sample-availability">{sample.availability}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="background-section" aria-labelledby="skills-heading">
+      <header>
+        <span>07</span>
+        <p>Skills & Interests</p>
+        <h2 id="skills-heading">能力与方向</h2>
+      </header>
+      <ul class="skills-grid">
+        {skills.map((skill, index) => (
+          <li><span>{String(index + 1).padStart(2, '0')}</span>{skill}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="background-section awards-section" aria-labelledby="awards-heading">
+      <header>
+        <span>08</span>
+        <p>Selected Awards & Activities</p>
+        <h2 id="awards-heading">奖项与活动</h2>
+      </header>
+      <ul class="awards-list">
+        {awards.map((award) => <li>{award}</li>)}
+      </ul>
+    </section>
+  </div>
+
+  <section class="background-summary">
+    <div class="shell">
+      <p class="kicker">FROM BACKGROUND TO PRACTICE</p>
+      <h2>从法律训练，走向可验证的工具实践</h2>
+      <p>这些经历共同构成了我进入法律 AI 方向的基础：一方面，我接受了系统法学训练，并接触法院、律所、仲裁和英文案例分析等法律实务与学习场景；另一方面，我也在尝试把法律工作中的证据整理、风险筛查、工时核算等具体问题转化为工具原型。</p>
+      <p>未来，我希望继续探索 AI 工具进入法律实务后，如何实现结果可验证、依据可靠、流程可控与责任边界清晰。</p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { withBase } from '../lib/site';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="project-card">
+  <a class="card-visual" href={withBase(`projects/${project.id}/`)} aria-label={`查看${project.data.title}`}>
+    <img src={withBase(project.data.cover)} alt="" loading="lazy" />
+    <span class="project-number">{project.data.eyebrow}</span>
+  </a>
+  <div class="card-body">
+    <div class="meta-row">
+      {project.data.year && <span>{project.data.year}</span>}
+      <span class="status-group">
+        {project.data.statuses.map((status) => <span class="status-badge" data-status={status}>{status}</span>)}
+      </span>
+    </div>
+    <h3><a href={withBase(`projects/${project.id}/`)}>{project.data.title}</a></h3>
+    <p>{project.data.summary}</p>
+    <ul class="tag-list" aria-label="项目标签">
+      {project.data.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+    <a class="text-link" href={withBase(`projects/${project.id}/`)}>查看项目档案 <span>↗</span></a>
+  </div>
+</article>

@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, withBase } from '../../lib/site';
+
+const articles = (await getCollection('writing'))
+  .filter((item) => !item.data.draft)
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+---
+
+<BaseLayout title="文章与观察" description="关于法律 AI、工具实践和风险治理的文章与观察。">
+  <header class="page-hero shell">
+    <p class="kicker">WRITING & NOTES</p>
+    <h1>文章与观察</h1>
+    <p>记录对法律 AI 产品、专业工作流与技术治理的阶段性理解。观点会更新，判断需经检验。</p>
+  </header>
+  <section class="shell page-section">
+    <div class="filter-line">
+      <span>全部文章</span>
+      <span>{articles.length} 篇记录</span>
+    </div>
+    <div class="article-archive">
+      {articles.map((article) => {
+        const href = article.data.externalUrl || withBase(`writing/${article.id}/`);
+        return (
+          <article class="article-item">
+            <div class="article-date">{formatDate(article.data.publishedAt)}</div>
+            <div>
+              <div class="article-labels">
+                <p class="article-category">{article.data.category}</p>
+                {article.data.statuses.map((status) => <span class="article-status">{status}</span>)}
+              </div>
+              <h2><a href={href} target={article.data.externalUrl ? '_blank' : undefined} rel={article.data.externalUrl ? 'noopener noreferrer' : undefined}>{article.data.title}</a></h2>
+              <p>{article.data.description}</p>
+              <ul class="tag-list">{article.data.tags.map((tag) => <li>{tag}</li>)}</ul>
+            </div>
+            <a class="article-arrow" href={href} aria-label={`阅读${article.data.title}`}>↗</a>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

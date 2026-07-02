@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/site';
+---
+
+<BaseLayout title="联系我" description="围绕法律 AI、法律科技工具原型、律所 AI 培训与合规科技的交流方式。">
+  <section class="contact-page shell">
+    <div>
+      <p class="kicker">CONTACT</p>
+      <h1>Contact<br /><span>联系我</span></h1>
+      <p class="contact-lead">如果你对法律 AI、法律科技工具原型、律所 AI 培训、合规科技或相关交流合作感兴趣，欢迎联系我。</p>
+      <dl class="contact-list">
+        <div>
+          <dt>邮箱</dt>
+          <dd><a href="mailto:181916137260767@163.com">181916137260767@163.com</a></dd>
+        </div>
+        <div>
+          <dt>微信</dt>
+          <dd>18191613726 <small>添加时请注明来意</small></dd>
+        </div>
+        <div>
+          <dt>公众号</dt>
+          <dd>彤律制作中</dd>
+        </div>
+      </dl>
+    </div>
+    <aside class="contact-card">
+      <p class="aside-title">公开作品与内容</p>
+      <a href="https://yangkewei2001-collab.github.io/trade-risk-screening-demo/" target="_blank" rel="noopener noreferrer"><span>出口合规风险初筛 Demo</span><small>已上线公开原型</small><b>↗</b></a>
+      <a href={withBase('writing/')}><span>文章与观察</span><small>法律 AI 与律所工作流</small><b>→</b></a>
+      <a href={withBase('background/')}><span>背景与实践</span><small>法学训练、实务与案例分析</small><b>→</b></a>
+      <p class="privacy-note">联系时请简要说明来意，便于我及时了解交流主题。</p>
+    </aside>
+  </section>
+</BaseLayout>

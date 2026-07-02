@@ -1,0 +1,18 @@
+---
+import { siteMeta, withBase } from '../lib/site';
+---
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div>
+      <p class="footer-title">{siteMeta.title}</p>
+      <p>把技术能力放在法律判断与责任边界之内。</p>
+    </div>
+    <div class="footer-links">
+      <a href={withBase('projects/')}>项目档案</a>
+      <a href={withBase('contact/')}>联系与说明</a>
+    </div>
+    <p class="footer-disclaimer">本网站仍在持续更新中，所展示的工具 Demo、文章和项目内容仅用于学习、交流与流程展示，不构成具体法律意见。涉及他人肖像、真实案件或非公开信息的材料将在发布前进行授权确认或脱敏处理。</p>
+    <p class="copyright">© {new Date().getFullYear()} {siteMeta.title}</p>
+  </div>
+</footer>

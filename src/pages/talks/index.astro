@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, withBase } from '../../lib/site';
+
+const talks = (await getCollection('talks')).sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+---
+
+<BaseLayout title="Talks & Training｜培训与分享" description="面向律师与同辈学生的法律 AI 培训和交流记录。">
+  <header class="page-hero shell">
+    <p class="kicker">TALKS & TRAINING</p>
+    <h1>Talks & Training<span>培训与分享</span></h1>
+    <p>我尝试把法律 AI 的实务观察、工具使用方法和风险意识，转化为面向律师与同辈学生的培训和交流内容。</p>
+  </header>
+
+  <section class="shell page-section talk-list">
+    {talks.map((talk, index) => (
+      <article class:list={['talk-item', { 'has-photos': talk.data.photos.length > 0 }]}>
+        <div class="talk-index">{String(index + 1).padStart(2, '0')}</div>
+        <div class="talk-main">
+          <div class="talk-heading-row">
+            <p class="kicker">{talk.data.format}</p>
+            <span class="talk-status" data-status={talk.data.status}>{talk.data.status}</span>
+          </div>
+          <h2>{talk.data.title}</h2>
+          <p class="talk-topic"><span>主题</span>{talk.data.topic}</p>
+          <p class="talk-summary">{talk.data.summary}</p>
+          <dl class="talk-meta">
+            <div><dt>时间</dt><dd>{formatDate(talk.data.date)}</dd></div>
+            <div><dt>地点</dt><dd>{talk.data.location}</dd></div>
+            <div><dt>对象</dt><dd>{talk.data.audience}</dd></div>
+            <div><dt>我的角色</dt><dd>{talk.data.role}</dd></div>
+          </dl>
+          <div class="talk-tags" aria-label="主题标签">
+            {talk.data.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+        </div>
+
+        {talk.data.photos.length > 0 && (
+          <div class="talk-photos">
+            {talk.data.photos.slice(0, 2).map((photo) => (
+              <figure>
+                <img src={withBase(photo.src)} alt={photo.alt} loading="lazy" />
+                {photo.caption && <figcaption>{photo.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        )}
+      </article>
+    ))}
+
+    <p class="talks-privacy-note">培训与活动照片仅用于展示公开交流经历；涉及他人肖像或非公开信息的图片将在发布前进行授权确认或脱敏处理。</p>
+  </section>
+</BaseLayout>

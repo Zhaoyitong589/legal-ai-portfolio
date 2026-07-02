@@ -1,0 +1,47 @@
+---
+import { siteMeta, withBase } from '../lib/site';
+
+const items = [
+  ['首页', ''],
+  ['项目', 'projects/'],
+  ['文章', 'writing/'],
+  ['分享', 'talks/'],
+  ['背景', 'background/'],
+  ['联系', 'contact/']
+];
+
+const current = Astro.url.pathname;
+const isActive = (path: string) => {
+  const href = withBase(path);
+  if (!path) return current === href || current === href.replace(/\/$/, '');
+  return current.startsWith(href);
+};
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href={withBase()} aria-label={`${siteMeta.title}首页`}>
+      <span class="brand-mark" aria-hidden="true">法·AI</span>
+      <span class="brand-name">{siteMeta.title}</span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="sr-only">展开导航</span>
+      <span></span><span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="主导航">
+      {items.map(([label, path]) => (
+        <a href={withBase(path)} aria-current={isActive(path) ? 'page' : undefined}>{label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.menu-button');
+  const nav = document.querySelector<HTMLElement>('.site-nav');
+  button?.addEventListener('click', () => {
+    const open = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!open));
+    nav?.classList.toggle('is-open', !open);
+  });
+</script>
