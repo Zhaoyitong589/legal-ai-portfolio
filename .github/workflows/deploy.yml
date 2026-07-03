@@ -18,51 +18,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v6
 
-      - name: Configure Pages paths
-        shell: bash
-        env:
-          CUSTOM_SITE_URL: ${{ vars.SITE_URL }}
-          CUSTOM_BASE_PATH: ${{ vars.BASE_PATH }}
-        run: |
-          REPO_NAME="${GITHUB_REPOSITORY#*/}"
-          OWNER_NAME="${GITHUB_REPOSITORY%/*}"
-
-          if [[ -n "$CUSTOM_BASE_PATH" ]]; then
-            BASE_PATH="$CUSTOM_BASE_PATH"
-          elif [[ "$REPO_NAME" == "$OWNER_NAME.github.io" ]]; then
-            BASE_PATH="/"
-          else
-            BASE_PATH="/$REPO_NAME"
-          fi
-
-          if [[ -n "$CUSTOM_SITE_URL" ]]; then
-            SITE_URL="$CUSTOM_SITE_URL"
-          else
-            SITE_URL="https://$OWNER_NAME.github.io"
-          fi
-
-          echo "BASE_PATH=$BASE_PATH" >> "$GITHUB_ENV"
-          echo "SITE_URL=$SITE_URL" >> "$GITHUB_ENV"
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Install, build, and upload site
+        uses: withastro/action@v6
         with:
           node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
 
   deploy:
     environment:
@@ -73,4 +35,4 @@ jobs:
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

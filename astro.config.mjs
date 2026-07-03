@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
-const base = process.env.BASE_PATH || '/';
-const site = process.env.SITE_URL;
+const site = process.env.SITE_URL || 'https://Zhaoyitong589.github.io';
+const base = process.env.BASE_PATH || '/legal-ai-portfolio/';
 
 export default defineConfig({
   site,
