@@ -65,9 +65,22 @@ const latestWriting = (await getCollection('writing'))
     <a class="text-link about-link" href={withBase('background/')}>查看完整背景 <span>→</span></a>
   </section>
 
+  <section class="section shell">
+    <div class="section-heading">
+      <div>
+        <p class="section-index">01 / 代表项目</p>
+        <h2>从问题到原型</h2>
+      </div>
+      <a class="text-link" href={withBase('projects/')}>浏览全部项目 <span>→</span></a>
+    </div>
+    <div class="project-grid">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+
   <section class="practice-map shell" aria-labelledby="practice-map-heading">
     <div class="practice-map-heading">
-      <p class="section-index">01 / PRACTICE MAP</p>
+      <p class="section-index">02 / PRACTICE MAP</p>
       <div>
         <h2 id="practice-map-heading">Practice Map<span>我的实践路径</span></h2>
         <p>我尝试把法学训练、法律实务观察和 AI 工具原型连接起来，理解 AI 进入法律场景后的风险、边界与治理问题。</p>
@@ -123,7 +136,7 @@ const latestWriting = (await getCollection('writing'))
   <section class="method" aria-labelledby="method-heading">
     <div class="shell">
       <div class="method-heading">
-        <p class="section-index">02 / METHOD</p>
+        <p class="section-index">03 / METHOD</p>
         <div>
           <h2 id="method-heading">Method<span>我的工作方法</span></h2>
           <p>从真实法律场景出发，把模糊需求转化为可展示、可讨论、可复核的工具原型。</p>
@@ -151,19 +164,6 @@ const latestWriting = (await getCollection('writing'))
           <p>关注依据可靠性、结果可验证、人工复核、隐私脱敏和责任边界。</p>
         </li>
       </ol>
-    </div>
-  </section>
-
-  <section class="section shell">
-    <div class="section-heading">
-      <div>
-        <p class="section-index">03 / 代表项目</p>
-        <h2>从问题到原型</h2>
-      </div>
-      <a class="text-link" href={withBase('projects/')}>浏览全部项目 <span>→</span></a>
-    </div>
-    <div class="project-grid">
-      {projects.map((project) => <ProjectCard project={project} />)}
     </div>
   </section>
 
