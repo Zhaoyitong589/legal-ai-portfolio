@@ -103,6 +103,9 @@ button { font: inherit; }
   color: var(--gold); border: 1px solid var(--gold); font-family: var(--serif); font-size: 12px;
 }
 
+.positioning-banner { padding-block: 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.positioning-banner p { max-width: 780px; margin: 0 auto; color: var(--green); font-family: var(--serif); font-size: 17px; line-height: 1.9; text-align: center; }
+
 .home-about {
   display: grid; grid-template-columns: 160px minmax(0, 1fr) auto;
   align-items: center; gap: 34px; padding-block: 46px; border-top: 1px solid var(--line);
@@ -255,6 +258,8 @@ button { font: inherit; }
 .risk-box { margin-top: 25px; padding: 19px; border-left: 3px solid var(--red); background: #eaded8; }
 .risk-box strong { color: var(--red); font-size: 12px; }
 .risk-box p { margin: 7px 0 0; color: #624d47; font-size: 12px; }
+.render-note { margin: 12px 0 0; padding: 10px 13px; border-radius: 5px; color: #6b5e3d; font-size: 11px; line-height: 1.6; background: #f5f2ea; }
+.render-note::before { content: "⏱"; margin-right: 6px; }
 .prose { font-family: var(--serif); font-size: 17px; line-height: 2; }
 .prose h2 { margin: 2.4em 0 .65em; padding-bottom: .35em; border-bottom: 1px solid var(--line); font-size: 29px; line-height: 1.4; }
 .prose h2:first-child { margin-top: 0; }

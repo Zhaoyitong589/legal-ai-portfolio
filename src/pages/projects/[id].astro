@@ -62,6 +62,9 @@ const media = [
           <div class="project-links">
             <p class="aside-title">项目入口</p>
             <a class="button primary full" href={project.data.externalUrl} target="_blank" rel="noopener noreferrer">访问在线 Demo ↗</a>
+            {project.data.externalUrl.includes('onrender.com') && (
+              <p class="render-note">在线服务使用免费实例，初次访问可能需要等待约 50 秒启动。如暂时无法访问，可先查看右侧的项目说明、截图与源代码。</p>
+            )}
           </div>
         )}
         {project.data.sourceUrl && (
