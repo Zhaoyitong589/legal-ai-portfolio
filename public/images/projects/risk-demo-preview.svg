@@ -1,0 +1,26 @@
+<svg width="960" height="600" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="外贸风险筛查演示动画">
+  <rect width="960" height="600" fill="#e8e2d5"/>
+  <rect x="52" y="54" width="856" height="492" fill="#f7f5ef" stroke="#c8bfae"/>
+  <text x="82" y="105" fill="#173e36" font-family="Arial, sans-serif" font-size="28" font-weight="700">Trade Risk Screening Demo</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="82" y="150" width="235" height="315" rx="8" fill="#ffffff" stroke="#d8d0c1"/>
+    <text x="120" y="190" fill="#65706b" font-size="18">Mock Clauses</text>
+    <line x1="120" y1="245" x2="270" y2="245" stroke="#173e36" stroke-width="8"/>
+    <line x1="120" y1="310" x2="250" y2="310" stroke="#173e36" stroke-width="8"/>
+    <line x1="120" y1="375" x2="282" y2="375" stroke="#173e36" stroke-width="8"/>
+    <rect x="362" y="150" width="235" height="315" rx="8" fill="#ffffff" stroke="#d8d0c1"/>
+    <text x="420" y="190" fill="#65706b" font-size="18">Risk Tags</text>
+    <rect x="415" y="232" width="130" height="34" rx="17" fill="#eaded8"/>
+    <rect x="415" y="300" width="150" height="34" rx="17" fill="#f2e5cd"/>
+    <rect x="415" y="368" width="115" height="34" rx="17" fill="#dce7e0"/>
+    <rect x="642" y="150" width="235" height="315" rx="8" fill="#ffffff" stroke="#d8d0c1"/>
+    <text x="695" y="190" fill="#65706b" font-size="18">Bilingual Report</text>
+    <line x1="692" y1="250" x2="835" y2="250" stroke="#173e36" stroke-width="8"/>
+    <line x1="692" y1="310" x2="815" y2="310" stroke="#d4ad62" stroke-width="8"/>
+    <line x1="692" y1="370" x2="848" y2="370" stroke="#a94d3b" stroke-width="8"/>
+  </g>
+  <circle r="15" fill="#d4ad62">
+    <animateMotion dur="3.2s" repeatCount="indefinite" path="M322 306 L358 306 L602 306 L638 306"/>
+  </circle>
+  <text x="82" y="510" fill="#65706b" font-family="Arial, sans-serif" font-size="18">Fictional contract clauses only</text>
+</svg>

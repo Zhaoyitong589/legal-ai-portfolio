@@ -2,12 +2,41 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'zod';
 
+const projectDetails = z.object({
+  painPoint: z.string(),
+  targetUsers: z.string(),
+  inputs: z.string(),
+  outputs: z.string(),
+  currentForm: z.string(),
+  aiRole: z.string(),
+  humanReviewBoundary: z.string(),
+  limitations: z.string(),
+  nextIteration: z.string(),
+  capabilityProof: z.string()
+});
+
+const demoWalkthrough = z.object({
+  watchDemo: z.string(),
+  sampleInput: z.string(),
+  sampleOutput: z.string(),
+  currentStatus: z.string(),
+  privacyNote: z.string()
+});
+
+const demoMedia = z.object({
+  poster: z.string().optional(),
+  previewAnimation: z.string().optional(),
+  previewVideo: z.string().optional(),
+  demoVideo: z.string().optional()
+}).default({});
+
 const projects = defineCollection({
   loader: glob({ base: './src/content/projects', pattern: '**/*.md' }),
   schema: z.object({
     title: z.string(),
     eyebrow: z.string(),
     summary: z.string(),
+    oneLine: z.string(),
     year: z.number().optional(),
     statuses: z.array(z.enum(['已上线', '本地原型', '暂未公开部署', '待部署'])).min(1),
     featured: z.boolean().default(false),
@@ -24,7 +53,10 @@ const projects = defineCollection({
     externalUrl: z.url().optional(),
     sourceUrl: z.url().optional(),
     updatedAt: z.coerce.date(),
-    riskNote: z.string()
+    riskNote: z.string(),
+    projectDetails,
+    demoWalkthrough,
+    demoMedia
   })
 });
 

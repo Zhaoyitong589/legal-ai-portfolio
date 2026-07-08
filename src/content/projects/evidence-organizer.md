@@ -1,61 +1,69 @@
 ---
-title: "律师证据图片时间轴整理工具"
+title: "证据时间轴整理原型：本地化证据材料整理与 Word 报告生成"
 eyebrow: "DEMO 02"
-summary: "已上线：交互式工具部署在 Render，可上传图片 ZIP 与 Umi-OCR 结果，自动提取时间、建议排序，并生成供律师复核的 Word、Excel 与处理日志。"
-statuses: ["已上线"]
+summary: "面向律师处理涉隐私案件材料时的证据图片整理需求，当前版本是本地化原型：接收图片 ZIP 与 OCR 文本，提取时间信息、建议排序，并生成可由律师复核的 Word 报告、Excel 底稿与处理日志。"
+oneLine: "上传虚构证据图片与 OCR 文本，自动整理时间线并生成可复核的 Word 报告。"
+statuses: ["本地原型"]
 featured: true
 order: 2
-tags: ["证据整理", "OCR", "Word / Excel"]
+tags: ["证据整理", "OCR", "本地化原型", "Word 报告"]
 cover: "images/projects/evidence-tool-ui-redacted.png"
-coverAlt: "律师证据图片时间轴整理工具的在线工具界面"
-coverCaption: "工具界面：上传图片 ZIP 包与 Umi-OCR 结果，在线提取时间并生成待核对材料"
+coverAlt: "证据时间轴整理原型的工具界面"
+coverCaption: "工具界面：上传图片 ZIP 包与 Umi-OCR 结果，提取时间并生成待核对材料。截图已脱敏。"
 screenshots:
   - src: "images/projects/evidence-timeline-output-redacted.png"
     alt: "经过脱敏处理的 Word 证据时间轴整理表输出示例"
-    caption: "输出结果：Word 证据时间轴整理表（测试数据，敏感内容已遮挡）"
-updatedAt: "2026-07-03"
+    caption: "输出结果：Word 证据时间轴整理表。测试数据已脱敏。"
+updatedAt: "2026-07-07"
 externalUrl: "https://legal-evidence-timeline-tool.onrender.com"
 sourceUrl: "https://github.com/Zhaoyitong589/legal-evidence-timeline-tool"
-riskNote: "OCR 识别和自动排序可能存在错误，结果仅用于证据整理辅助，最终需要律师人工核对。"
+riskNote: "本工具为流程演示与辅助分析原型，不构成法律意见。所有输出结果均需由专业人员结合原始材料、现行法律依据和案件事实进行复核。"
+projectDetails:
+  painPoint: "律师处理大量聊天截图、票据、照片等证据材料时，常需要先按时间顺序整理材料；人工逐张识别日期、命名和排序耗时，且容易遗漏。"
+  targetUsers: "需要整理案件证据材料的律师、律师助理、法务或法律服务团队。"
+  inputs: "证据图片 ZIP 包、Umi-OCR 导出的 TXT 文本、文件名与可选备注信息。"
+  outputs: "按时间建议排序的 Word 报告、Excel 复核底稿、处理日志和异常提示。"
+  currentForm: "本地化原型，同时保留脱敏网页演示入口；更适合处理涉及隐私的案件材料。"
+  aiRole: "AI/自动化主要参与 OCR 结果解析、时间信息抽取、排序建议和报告结构生成。"
+  humanReviewBoundary: "律师必须核对原始图片、OCR 文本、时间识别结果、排序逻辑和材料与案件事实的对应关系。"
+  limitations: "OCR 识别、模糊日期、截图上下文和材料真实性判断均不能完全自动化。"
+  nextIteration: "后续可拓展为本地打包版、律所内网部署版、脱敏网页演示版，并增加异常日期标注和人工批注功能。"
+  capabilityProof: "证明我能把律师证据整理任务拆成隐私保护、输入规范、自动排序、报告生成和人工复核几个可交付节点。"
+demoWalkthrough:
+  watchDemo: "查看从虚构聊天记录、打卡截图和票据图片上传，到 OCR 解析、时间抽取、排序建议和 Word 报告生成的流程。"
+  sampleInput: "虚构聊天截图、虚构打卡截图、模拟票据图片、Umi-OCR 示例文本和测试 ZIP 包。"
+  sampleOutput: "样例 Word 时间轴报告、Excel 复核底稿、异常日期提示和处理日志。"
+  currentStatus: "本地化原型；作品集仅展示脱敏或虚构样例，不展示真实案件材料。"
+  privacyNote: "真实案件材料涉及保密义务，因此作品集仅展示虚构聊天记录、打卡截图和样例 Word 报告。当前工具重点展示从图片材料到时间轴报告的处理流程。"
+demoMedia:
+  poster: "images/projects/evidence-tool-ui-redacted.png"
+  previewAnimation: "images/projects/evidence-demo-preview.svg"
 ---
 
 ## 项目背景
 
-律师处理大量证据图片时，往往需要结合 OCR 结果逐张识别日期，再按时间顺序整理材料。该工具尝试把图片、OCR 文本、时间提取、排序和结果导出连接成一个可复核的辅助流程。
+证据时间轴整理不是单纯的“图片排序”问题。真实案件材料往往包含聊天截图、转账记录、票据、照片和扫描件，材料中有隐私信息，也有 OCR 识别错误、日期不完整、上下文缺失等问题。
 
-## 当前进展
+这个原型的定位是：在不替代律师判断的前提下，先把重复性整理工作工具化，让律师更快进入事实核对和争点分析。
 
-已完成独立项目仓库 `legal-evidence-timeline-tool` 并部署至 Render：
+## 可视化演示
 
-- **在线工具**：https://legal-evidence-timeline-tool.onrender.com 支持上传图片 ZIP 与 Umi-OCR TXT，在线完成安全解压、文件匹配、时间提取、建议排序和结果导出；
-- **项目说明页**：https://Zhaoyitong589.github.io/legal-evidence-timeline-tool/ 包含项目背景、处理流程、输出示例与使用边界；
-- **源代码**：https://github.com/Zhaoyitong589/legal-evidence-timeline-tool
+真实案件材料涉及保密义务，因此作品集仅展示虚构聊天记录、打卡截图和样例 Word 报告。当前工具重点展示从图片材料到时间轴报告的处理流程：上传虚构图片材料和 OCR 文本，系统提取候选时间，生成排序建议，再导出 Word 报告、Excel 复核底稿和处理日志。
 
-## 解决的问题
+## 当前形态
 
-- 接收图片 ZIP 包和 Umi-OCR 导出的识别结果；
-- 自动解析 OCR 文本并提取时间信息；
-- 按识别出的时间对图片进行排序；
-- 生成可供律师人工核对的 Word、Excel 与处理日志。
+当前版本是本地化证据材料整理原型，适合处理涉及隐私的案件材料。网页版本主要用于脱敏演示和求职展示。真实案件材料更适合在本地或律所内网环境中处理。
 
-## 我的工作
+## 后续部署方向
 
-需求拆解、工作流设计、OCR 结果处理逻辑、时间线排序逻辑、输出格式设计、AI 辅助原型开发。
+1. 本地打包版：供个人律师或律师助理在本机运行，减少敏感材料外传。
+2. 律所内网部署版：适合团队统一使用，并结合权限控制、日志留痕和数据保留规则。
+3. 脱敏网页演示版：用于公开展示流程和交互，不承载真实案件材料。
 
-## 能力证明
+## 这个项目证明了什么
 
-本项目体现了我对律师证据整理流程的拆解能力。我将大量图片证据、OCR 文本、时间识别、建议排序、Word 展示材料和 Excel 复核底稿连接成一条半自动化流程，并强调 OCR 结果与排序结果必须由律师人工核对。
+这个项目证明的不是“AI 可以自动处理证据”，而是我能识别法律工作流中的低风险辅助节点：材料接收、OCR 解析、时间抽取、排序建议、Word 报告生成和人工复核底稿。
 
-## 方法与实现
+## 免责声明
 
-工具先为每次任务生成独立任务编号，保存 ZIP 和 TXT 后进行安全解压，再按文件名匹配图片与 OCR 记录。系统从文本中提取候选时间，将明确时间按先后排序，并把模糊时间或无时间记录后置，最终生成 Word 证据展示材料、Excel 人工复核底稿和 `process_log.txt`。
-
-## 风险提示
-
-OCR 识别和自动排序可能存在错误，结果仅用于证据整理辅助，最终需要律师人工核对。
-
-## 后续计划
-
-1. 使用脱敏样本继续测试在线工具的时间提取、排序和异常处理逻辑；
-2. 完善数据清理、权限控制和隐私安全说明；
-3. 收集律师同行反馈，优化输出格式与复核流程。
+本工具为流程演示与辅助分析原型，不构成法律意见。所有输出结果均需由专业人员结合原始材料、现行法律依据和案件事实进行复核。

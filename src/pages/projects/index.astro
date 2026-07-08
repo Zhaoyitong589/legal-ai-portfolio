@@ -10,13 +10,17 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
   <header class="page-hero shell">
     <p class="kicker">PROJECT ARCHIVE</p>
     <h1>法律 AI 项目档案</h1>
-    <p>目前收录风险筛查、证据整理和工时核算三个 Demo，重点记录问题拆解、原型方法与使用边界。</p>
+    <p>目前收录风险筛查、证据整理和工时核算三个 Demo。每个项目都提供可视化演示说明、样例输入、样例输出、当前形态和保密边界，方便快速理解工具如何使用。</p>
   </header>
   <section class="shell page-section">
     <div class="archive-note">
       <span>收录项目 {String(projects.length).padStart(2, '0')}</span>
       <span>已上线 / 本地原型 / 待部署</span>
-      <span>最后更新：2026.06.30</span>
+      <span>最后更新：2026.07.07</span>
+    </div>
+    <div class="privacy-banner">
+      <strong>统一保密说明</strong>
+      <p>由于法律服务与外贸场景涉及客户信息、案件材料和业务保密要求，作品集中的演示均基于虚构或脱敏数据，仅用于展示产品逻辑、交互流程和输出结果。</p>
     </div>
     <div class="project-grid project-grid-page">
       {projects.map((project) => <ProjectCard project={project} />)}

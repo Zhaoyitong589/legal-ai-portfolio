@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatDate, withBase } from '../../lib/site';
 
@@ -9,15 +9,7 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { Content } = await render(project);
-const media = [
-  {
-    src: project.data.cover,
-    alt: project.data.coverAlt || `${project.data.title}界面截图`,
-    caption: project.data.coverCaption
-  },
-  ...(project.data.screenshots || [])
-];
+const poster = project.data.demoMedia.poster || project.data.cover;
 ---
 
 <BaseLayout title={project.data.title} description={project.data.summary}>
@@ -34,7 +26,7 @@ const media = [
           </div>
           <h1>{project.data.title}</h1>
         </div>
-        <p class="detail-summary">{project.data.summary}</p>
+        <p class="detail-summary">{project.data.oneLine}</p>
       </div>
       <dl class="detail-meta">
         {project.data.year && <div><dt>时间</dt><dd>{project.data.year}</dd></div>}
@@ -48,39 +40,99 @@ const media = [
         <div><dt>关键词</dt><dd>{project.data.tags.join(' · ')}</dd></div>
       </dl>
     </header>
-    <div class:list={['detail-media-grid', 'shell', { 'has-multiple': media.length > 1 }]}>
-      {media.map((item) => (
-        <figure>
-          <img src={withBase(item.src)} alt={item.alt} />
-          {item.caption && <figcaption>{item.caption}</figcaption>}
-        </figure>
-      ))}
-    </div>
-    <div class="detail-content shell">
-      <aside class="detail-aside">
-        {project.data.externalUrl && (
-          <div class="project-links">
-            <p class="aside-title">项目入口</p>
-            <a class="button primary full" href={project.data.externalUrl} target="_blank" rel="noopener noreferrer">访问在线 Demo ↗</a>
-            {project.data.externalUrl.includes('onrender.com') && (
-              <p class="render-note">在线服务使用免费实例，初次访问可能需要等待约 50 秒启动。如暂时无法访问，可先查看右侧的项目说明、截图与源代码。</p>
+
+    <section class="project-story shell" aria-label="项目展示结构">
+      <div class="story-main">
+        <section class="story-section" id="project-overview">
+          <p class="section-index">PROJECT OVERVIEW</p>
+          <h2>Project Overview</h2>
+          <p>{project.data.summary}</p>
+        </section>
+
+        <section class="story-section" id="pain-point">
+          <p class="section-index">PAIN POINT</p>
+          <h2>Pain Point</h2>
+          <p>{project.data.projectDetails.painPoint}</p>
+        </section>
+
+        <section class="story-section demo-video-section" id="demo-walkthrough">
+          <p class="section-index">DEMO WALKTHROUGH</p>
+          <h2>Demo Walkthrough</h2>
+          <div class="demo-video-frame">
+            <video
+              controls
+              playsinline
+              preload="metadata"
+              poster={withBase(poster)}
+              aria-label={`${project.data.title} MP4 演示`}
+            >
+              {project.data.demoMedia.demoVideo && <source src={withBase(project.data.demoMedia.demoVideo)} type="video/mp4" />}
+            </video>
+            {!project.data.demoMedia.demoVideo && (
+              <div class="video-placeholder">
+                <span>MP4 Demo Slot</span>
+                <p>演示视频位已预留；当前使用脱敏截图作为封面。</p>
+              </div>
             )}
           </div>
+          <p>{project.data.demoWalkthrough.watchDemo}</p>
+        </section>
+
+        <section class="story-section sample-grid" aria-label="样例输入输出">
+          <div id="sample-input">
+            <p class="section-index">SAMPLE INPUT</p>
+            <h2>Sample Input</h2>
+            <p>{project.data.demoWalkthrough.sampleInput}</p>
+          </div>
+          <div id="sample-output">
+            <p class="section-index">SAMPLE OUTPUT</p>
+            <h2>Sample Output</h2>
+            <p>{project.data.demoWalkthrough.sampleOutput}</p>
+          </div>
+        </section>
+
+        <section class="story-section" id="current-status">
+          <p class="section-index">CURRENT STATUS</p>
+          <h2>Current Status</h2>
+          <p>{project.data.demoWalkthrough.currentStatus}</p>
+        </section>
+
+        <section class="story-section" id="human-review-boundary">
+          <p class="section-index">HUMAN REVIEW BOUNDARY</p>
+          <h2>Human Review Boundary</h2>
+          <p>{project.data.projectDetails.humanReviewBoundary}</p>
+        </section>
+
+        <section class="story-section compact-pair" aria-label="限制与迭代">
+          <div id="limitations">
+            <p class="section-index">LIMITATIONS</p>
+            <h2>Limitations</h2>
+            <p>{project.data.projectDetails.limitations}</p>
+          </div>
+          <div id="next-iteration">
+            <p class="section-index">NEXT ITERATION</p>
+            <h2>Next Iteration</h2>
+            <p>{project.data.projectDetails.nextIteration}</p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="story-aside">
+        {project.data.externalUrl && (
+          <a class="button primary full" href={project.data.externalUrl} target="_blank" rel="noopener noreferrer">访问在线 Demo →</a>
         )}
         {project.data.sourceUrl && (
-          <div class="project-links">
-            {!project.data.externalUrl && <p class="aside-title">项目入口</p>}
-            <a class="button quiet full" href={project.data.sourceUrl} target="_blank" rel="noopener noreferrer">查看源代码 ↗</a>
-          </div>
+          <a class="button quiet full" href={project.data.sourceUrl} target="_blank" rel="noopener noreferrer">查看源代码 →</a>
         )}
+        <div class="risk-box">
+          <strong>统一保密说明</strong>
+          <p>由于法律服务与外贸场景涉及客户信息、案件材料和业务保密要求，作品集中的演示均基于虚构或脱敏数据，仅用于展示产品逻辑、交互流程和输出结果。</p>
+        </div>
         <div class="risk-box">
           <strong>使用边界</strong>
           <p>{project.data.riskNote}</p>
         </div>
       </aside>
-      <div class="prose">
-        <Content />
-      </div>
-    </div>
+    </section>
   </article>
 </BaseLayout>
