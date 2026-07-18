@@ -9,24 +9,31 @@ interface Props {
 const { project } = Astro.props;
 const poster = project.data.demoMedia.poster || project.data.cover;
 const previewImage = project.data.demoMedia.previewAnimation || poster;
+const isCaseStudy = project.id === 'cross-border-export';
 ---
 
-<article class="project-card demo-project-card">
-  <a class="demo-preview" href={withBase(`projects/${project.id}/#demo-walkthrough`)} aria-label={`观看${project.data.title}演示`}>
-    <video
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      poster={withBase(poster)}
-      aria-label={`${project.data.title} GIF 预览`}
-    >
-      {project.data.demoMedia.previewVideo && <source src={withBase(project.data.demoMedia.previewVideo)} type="video/mp4" />}
-    </video>
-    {!project.data.demoMedia.previewVideo && <img src={withBase(previewImage)} alt="" loading="lazy" />}
+<article class:list={['project-card', 'demo-project-card', { 'case-study-card': isCaseStudy }]}>
+  <a
+    class:list={['demo-preview', { 'case-preview': isCaseStudy }]}
+    href={withBase(isCaseStudy ? `projects/${project.id}/` : `projects/${project.id}/#demo-walkthrough`)}
+    aria-label={isCaseStudy ? `查看${project.data.title}案例` : `观看${project.data.title}演示`}
+  >
+    {!isCaseStudy && (
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster={withBase(poster)}
+        aria-label={`${project.data.title} GIF 预览`}
+      >
+        {project.data.demoMedia.previewVideo && <source src={withBase(project.data.demoMedia.previewVideo)} type="video/mp4" />}
+      </video>
+    )}
+    {(!project.data.demoMedia.previewVideo || isCaseStudy) && <img src={withBase(isCaseStudy ? poster : previewImage)} alt={project.data.coverAlt || ''} loading="lazy" />}
     <span class="project-number">{project.data.eyebrow}</span>
-    <span class="preview-label">GIF Preview / 演示预览</span>
+    <span class="preview-label">{isCaseStudy ? 'CASE STUDY / 真实业务案例' : 'GIF Preview / 演示预览'}</span>
   </a>
   <div class="card-body">
     <div class="meta-row">
@@ -37,10 +44,18 @@ const previewImage = project.data.demoMedia.previewAnimation || poster;
     </div>
     <h3><a href={withBase(`projects/${project.id}/`)}>{project.data.title}</a></h3>
     <p class="project-one-line">{project.data.oneLine}</p>
-    <p class="project-privacy-line">演示均使用虚构或脱敏数据，不展示真实业务材料。</p>
+    <p class="project-privacy-line">
+      {isCaseStudy ? '真实业务案例；公开页面仅展示脱敏流程和占位材料。' : '演示均使用虚构或脱敏数据，不展示真实业务材料。'}
+    </p>
     <div class="project-card-actions">
-      <a class="button primary" href={withBase(`projects/${project.id}/#demo-walkthrough`)}>观看演示</a>
-      <a class="button quiet" href={withBase(`projects/${project.id}/#sample-output`)}>查看样例输出</a>
+      {isCaseStudy ? (
+        <a class="button primary" href={withBase(`projects/${project.id}/`)}>查看案例</a>
+      ) : (
+        <>
+          <a class="button primary" href={withBase(`projects/${project.id}/#demo-walkthrough`)}>观看演示</a>
+          <a class="button quiet" href={withBase(`projects/${project.id}/#sample-output`)}>查看样例输出</a>
+        </>
+      )}
     </div>
   </div>
 </article>

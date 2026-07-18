@@ -38,7 +38,7 @@ const projects = defineCollection({
     summary: z.string(),
     oneLine: z.string(),
     year: z.number().optional(),
-    statuses: z.array(z.enum(['已上线', '本地原型', '暂未公开部署', '待部署'])).min(1),
+    statuses: z.array(z.enum(['已上线', '本地原型', '暂未公开部署', '待部署', '真实业务案例'])).min(1),
     featured: z.boolean().default(false),
     order: z.number(),
     tags: z.array(z.string()),

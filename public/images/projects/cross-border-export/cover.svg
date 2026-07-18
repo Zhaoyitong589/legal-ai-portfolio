@@ -1,0 +1,16 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">跨境出口流程建设案例封面</title>
+  <desc id="desc">深绿色档案式封面，标注 CBT-001 和跨境出口流程建设。</desc>
+  <rect width="1200" height="750" fill="#173e36"/>
+  <rect x="54" y="54" width="1092" height="642" stroke="#d4ad62" stroke-width="2"/>
+  <rect x="92" y="92" width="1016" height="566" stroke="#f3f0e8" stroke-opacity=".28"/>
+  <text x="102" y="142" fill="#d4ad62" font-family="Georgia, serif" font-size="24" letter-spacing="7">CBT-001</text>
+  <text x="102" y="326" fill="#f3f0e8" font-family="'Noto Serif SC','Songti SC',serif" font-size="70" font-weight="600">跨境出口流程建设</text>
+  <text x="104" y="389" fill="#c9d7d0" font-family="Inter,'Microsoft YaHei',sans-serif" font-size="28">CROSS-BORDER TRANSACTION x CONTRACT x CUSTOMS</text>
+  <line x1="102" y1="468" x2="812" y2="468" stroke="#d4ad62" stroke-width="2"/>
+  <g fill="#f3f0e8" fill-opacity=".82" font-family="Inter,'Microsoft YaHei',sans-serif" font-size="24">
+    <text x="102" y="535">CLIENT COMMUNICATION</text>
+    <text x="102" y="583">NNN AGREEMENT</text>
+    <text x="102" y="631">CUSTOMS DECLARATION</text>
+  </g>
+</svg>

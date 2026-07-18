@@ -10,9 +10,197 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const poster = project.data.demoMedia.poster || project.data.cover;
+const isCrossBorderExport = project.id === 'cross-border-export';
+const processSteps = [
+  ['客户沟通', '直接与海外客户确认商务问题、合同关注点和后续履约信息。'],
+  ['NNN 协议', '围绕保密、禁止使用、禁止绕行及争议解决条款推进修订。'],
+  ['销售合同', '处理交易主体、产品、付款、交付和中英文表述一致性。'],
+  ['收款与生产协调', '配合财务与技术人员确认收款节点、生产参数和履约安排。'],
+  ['出口申报', '进入国际贸易单一窗口，拆解申报字段并准备材料。'],
+  ['报关与交付', '衔接报关资料、系统问题和交付节点，推动交易继续落地。'],
+  ['经验沉淀', '把首次执行中遇到的问题整理为检查清单和可复用 SOP。']
+];
+const coreWork = [
+  ['英文客户沟通', '直接与海外客户确认商务和合同事项'],
+  ['双语合同修订', '处理销售合同、付款安排及中英文表述一致性'],
+  ['NNN 协议谈判', '参与适用法律、仲裁机构、仲裁地、语言和保密信息定义的沟通'],
+  ['出口申报', '实际进入国际贸易单一窗口，处理申报字段、资料准备和系统问题'],
+  ['跨部门协调', '与财务、技术人员及外部专业人士协作'],
+  ['SOP 沉淀', '将一次性问题整理为检查清单和可复用流程']
+];
+const keyCases = [
+  {
+    label: '案例 A',
+    title: '跨境争议解决条款',
+    problem: '双方需要就适用法律、仲裁机构、仲裁地和仲裁语言达成平衡。',
+    action: '梳理双方诉求，提出以中国法为适用法律、CIETAC Hong Kong Arbitration Center 为仲裁机构、香港为仲裁地、英语为仲裁语言的折中方案，并通过英文邮件推进确认。'
+  },
+  {
+    label: '案例 B',
+    title: '保密信息定义',
+    problem: '对方主张只有明确标记为“Confidential”的信息才受保护，但实际业务中大量技术和商业信息可能通过邮件、图纸、讨论和图片交换，未必每次显式标记。',
+    action: '提出同时保护“明确标记的信息”和“根据性质、内容及披露情境应被合理理解为保密的信息”的表述。'
+  },
+  {
+    label: '案例 C',
+    title: '首次出口申报',
+    problem: '首次接触国际贸易单一窗口，涉及企业信息、运输、包装、商品、监管和申报字段，且存在浏览器、证书和系统配置问题。',
+    action: '拆分字段，查询官方说明，向专业人士确认不确定项，逐项验证，并记录操作步骤以便复用。'
+  }
+];
+const evidenceItems = [
+  ['nnn-agreement-placeholder.svg', '双语 NNN 协议', '双语 NNN 协议：参与保密、禁止使用、禁止绕行条款修订'],
+  ['negotiation-email-placeholder.svg', '英文谈判邮件', '英文谈判邮件：就争议解决和保密范围提出修订方案'],
+  ['sales-contract-placeholder.svg', '双语销售合同', '双语销售合同：处理交易主体、产品、付款与履约条款'],
+  ['customs-declaration-placeholder.svg', '出口申报系统', '出口申报系统：实际参与出口报关信息录入'],
+  ['settlement-proof-placeholder.svg', '交易结果证明', '交易结果证明：证明项目进入真实收款与履行阶段']
+];
+const methodSteps = ['陌生问题', '拆分任务', '查询官方资料', '使用 AI 辅助', '咨询专业人士', '人工核验', '执行', '沉淀 SOP'];
 ---
 
 <BaseLayout title={project.data.title} description={project.data.summary}>
+  {isCrossBorderExport ? (
+    <article class="case-page">
+      <header class="detail-hero case-hero shell">
+        <a class="back-link" href={withBase('projects/')}>← 返回项目列表</a>
+        <div class="detail-title-grid">
+          <div>
+            <div class="detail-kicker-row">
+              <p class="kicker">{project.data.eyebrow}</p>
+              <span class="status-group">
+                {project.data.statuses.map((status) => <span class="status-badge" data-status={status}>{status}</span>)}
+              </span>
+            </div>
+            <h1>从 0 到 1 参与制造企业首次跨境出口</h1>
+            <p class="case-subtitle">From contract negotiation to customs declaration</p>
+          </div>
+          <p class="detail-summary">我并非在一开始就掌握所有出口环节，而是在真实交易推进中，持续拆解问题、寻找工具、咨询合适的专业人士、完成验证，并将经验沉淀为可复用流程。</p>
+        </div>
+        <dl class="detail-meta">
+          <div><dt>档案编号</dt><dd>{project.data.eyebrow}</dd></div>
+          <div><dt>英文标签</dt><dd>CROSS-BORDER TRANSACTION × CONTRACT × CUSTOMS</dd></div>
+          <div><dt>最近更新</dt><dd>{formatDate(project.data.updatedAt)}</dd></div>
+          <div><dt>关键词</dt><dd>{project.data.tags.join(' · ')}</dd></div>
+        </dl>
+      </header>
+
+      <div class="case-sections shell">
+        <section class="case-section" id="background">
+          <p class="section-index">01 / PROJECT BACKGROUND</p>
+          <h2>项目背景</h2>
+          <p>一家制造企业首次尝试直接开展海外业务，内部缺少成熟的外贸执行流程。我参与客户沟通、合同修订、后续履约沟通和出口申报，并与财务、技术人员及外部专业支持方协作，推动交易继续落地。</p>
+          <div class="responsibility-grid" aria-label="职责边界">
+            <div>
+              <h3>我负责</h3>
+              <p>英文客户沟通、双语文件修订、合同条款沟通、履约跟进、出口申报、流程梳理</p>
+            </div>
+            <div>
+              <h3>财务负责</h3>
+              <p>银行开户、收款及结汇相关工作</p>
+            </div>
+            <div>
+              <h3>技术人员负责</h3>
+              <p>产品参数与生产技术事项</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="case-section" id="transaction-flow">
+          <p class="section-index">02 / TRANSACTION FLOW</p>
+          <h2>交易流程</h2>
+          <ol class="case-timeline">
+            {processSteps.map(([title, text], index) => (
+              <li>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section class="case-section" id="core-work">
+          <p class="section-index">03 / CORE WORK</p>
+          <h2>我的核心工作</h2>
+          <div class="case-card-grid">
+            {coreWork.map(([title, text], index) => (
+              <article>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="case-section" id="key-cases">
+          <p class="section-index">04 / ISSUE NOTES</p>
+          <h2>关键问题案例</h2>
+          <div class="issue-list">
+            {keyCases.map((item) => (
+              <article>
+                <span>{item.label}</span>
+                <h3>{item.title}</h3>
+                <dl>
+                  <div><dt>问题</dt><dd>{item.problem}</dd></div>
+                  <div><dt>我的处理</dt><dd>{item.action}</dd></div>
+                </dl>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="case-section" id="evidence-materials">
+          <p class="section-index">05 / REDACTED MATERIALS</p>
+          <h2>证据材料</h2>
+          <p class="case-section-lead">以下为统一比例 placeholder。真实文件截图必须完成脱敏确认后再替换，且不得展示完整客户邮箱、个人电话、银行账号、完整合同金额、企业证书编号、报关统一编号、海关编号、客户个人地址、未脱敏签名和印章。</p>
+          <div class="evidence-gallery">
+            {evidenceItems.map(([fileName, alt, caption]) => {
+              const src = withBase(`images/projects/cross-border-export/${fileName}`);
+              return (
+                <figure>
+                  <a href={src} target="_blank" rel="noopener noreferrer" aria-label={`放大查看：${alt}`}>
+                    <img src={src} alt={alt} loading="lazy" />
+                  </a>
+                  <figcaption>{caption}</figcaption>
+                </figure>
+              );
+            })}
+          </div>
+        </section>
+
+        <section class="case-section" id="working-method">
+          <p class="section-index">06 / METHOD</p>
+          <h2>我的工作方法</h2>
+          <ol class="method-flow">
+            {methodSteps.map((step, index) => (
+              <li>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{step}</strong>
+              </li>
+            ))}
+          </ol>
+          <p class="method-note">我不要求自己一开始掌握所有答案，而是要求自己建立一套能够可靠解决未知问题的方法。</p>
+          <p class="ai-boundary-note">AI 用于信息整理、初稿比较和问题拆解，不替代关键条款、申报数据及业务决策的人工核验。</p>
+        </section>
+
+        <section class="case-section" id="reflection">
+          <p class="section-index">07 / REFLECTION</p>
+          <h2>项目反思</h2>
+          <p>这段经历让我意识到，跨境交易很少只是单一的法律问题。合同、付款、技术、报关、物流和沟通彼此牵连。真正有价值的能力，不只是完成一次任务，而是把陌生问题转化为可执行、可验证、可复用的业务流程。</p>
+        </section>
+
+        <section class="case-section related-tool" id="related-legal-ai-project">
+          <div>
+            <p class="section-index">08 / RELATED PROJECT</p>
+            <h2>从真实业务问题到工具原型</h2>
+            <p>在处理合同、付款、争议解决和出口流程后，我进一步思考：哪些风险可以前置识别，哪些检查可以标准化，哪些经验可以通过工具复用。由此形成了外贸交易法律风险初筛 Demo。</p>
+          </div>
+          <a class="button primary" href={withBase('projects/risk-screening/')}>查看外贸交易法律风险初筛工具</a>
+        </section>
+      </div>
+    </article>
+  ) : (
   <article class="detail-page">
     <header class="detail-hero shell">
       <a class="back-link" href={withBase('projects/')}>← 返回项目列表</a>
@@ -135,4 +323,5 @@ const poster = project.data.demoMedia.poster || project.data.cover;
       </aside>
     </section>
   </article>
+  )}
 </BaseLayout>
