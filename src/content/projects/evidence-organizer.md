@@ -38,6 +38,11 @@ demoWalkthrough:
 demoMedia:
   poster: "images/projects/evidence-tool-ui-redacted.png"
   previewAnimation: "images/projects/evidence-demo-preview.svg"
+tutorialResources:
+  pageUrl: "tutorials/evidence-timeline/"
+  pdfUrl: "tutorials/evidence-timeline/evidence-timeline-tutorial.pdf"
+  label: "Umi-OCR 到 Word 证据时间轴图文教程"
+  description: "用现有截图演示从 Umi-OCR 批量识别、上传 ZIP 与 TXT，到下载 Word 证据时间轴的完整操作流程。"
 ---
 
 ## 项目背景
@@ -67,3 +72,4 @@ demoMedia:
 ## 免责声明
 
 本工具为流程演示与辅助分析原型，不构成法律意见。所有输出结果均需由专业人员结合原始材料、现行法律依据和案件事实进行复核。
+

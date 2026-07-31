@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>证据时间轴工具图片教程</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212b;
+      --muted: #61707c;
+      --line: #dbe3e8;
+      --paper: #ffffff;
+      --wash: #f4f7f8;
+      --brand: #123d35;
+      --accent: #0b765f;
+      --gold: #c49a3a;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      background: var(--wash);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+    header {
+      background: #20313d;
+      color: #fff;
+      border-bottom: 4px solid var(--gold);
+      padding: 34px 28px 26px;
+    }
+    .wrap {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      margin: 0;
+      color: #d7e0e6;
+      font-size: 15px;
+    }
+    main {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 24px 28px 42px;
+    }
+    .notice {
+      background: #fff8e6;
+      border-left: 4px solid var(--gold);
+      padding: 13px 16px;
+      margin: 0 0 22px;
+      color: #3d3320;
+    }
+    .links {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin: 0 0 18px;
+    }
+    .links h2 {
+      margin: 0 0 12px;
+      font-size: 21px;
+    }
+    .link-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 0;
+    }
+    .link-row a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    section {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin: 18px 0;
+      overflow: hidden;
+    }
+    .step {
+      padding: 20px 22px 8px;
+    }
+    h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0 0 12px;
+    }
+    ul {
+      margin: 0 0 12px 22px;
+      padding: 0;
+    }
+    .shot {
+      border-top: 1px solid var(--line);
+      background: #f9fbfc;
+      padding: 14px;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid #d5dde3;
+      border-radius: 6px;
+      background: white;
+    }
+    .checklist {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px 22px;
+      margin-top: 22px;
+    }
+    .checklist h2 {
+      font-size: 21px;
+    }
+    code {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      background: #eef3f5;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>证据时间轴工具图片教程</h1>
+      <p class="subtitle">使用 Umi-OCR 批量识别证据图片，并上传到网页工具生成 Word 版证据时间轴。</p>
+    </div>
+  </header>
+  <main>
+    <div class="notice">当前教程使用 2026 年 7 月 31 日整理出的现有截图素材。图片中如包含本地路径、任务编号、浏览器标签页或案件文件名，正式发布前建议先裁剪或脱敏。</div>
+
+    <div class="links">
+      <h2>工具入口</h2>
+      <p class="link-row">
+        <a href="https://umi-ocr.com/zh-CN/download">下载 Umi-OCR</a>
+        <a href="https://zhaoyitong589.github.io/legal-ai-portfolio/projects/evidence-organizer/#demo-walkthrough">打开证据时间轴工具网页</a>
+      </p>
+    </div>
+
+    <section>
+      <div class="step">
+        <h2>1. 打开 Umi-OCR</h2>
+        <p>在 Windows 桌面找到 <code>Umi-OCR</code> 图标，双击打开软件。</p>
+      </div>
+      <div class="shot"><img src="raw_selected/01_桌面UmiOCR入口.png" alt="桌面 Umi-OCR 入口"></div>
+    </section>
+
+    <section>
+      <div class="step">
+        <h2>2. 进入 Umi-OCR 首页</h2>
+        <p>软件打开后会进入 Umi-OCR 首页。左侧功能栏中可以看到“截图OCR”“批量OCR”“批量文档”等功能。</p>
+      </div>
+      <div class="shot"><img src="raw_selected/02_UmiOCR首页.png" alt="Umi-OCR 首页"></div>
+    </section>
+
+    <section>
+      <div class="step">
+        <h2>3. 进入“批量OCR”并导入图片</h2>
+        <p>点击左侧的“批量OCR”，进入批量识别页面。可以直接将装有证据图片的文件包或图片文件夹拖入图片列表区域，也可以点击“打开图片”手动选择需要整理的证据图片。本示例中共导入 144 张图片。</p>
+      </div>
+      <div class="shot"><img src="raw_selected/03_进入批量OCR并导入144张图片.png" alt="进入批量OCR并导入144张图片"></div>
+    </section>
+
+    <section>
+      <div class="step">
+        <h2>4. 设置 TXT 标准格式和保存目录</h2>
+        <p>在右侧设置区确认输出格式。建议勾选 <code>txt 标准格式</code>，并设置结果保存目录，方便后续上传到网页工具。</p>
+      </div>
+      <div class="shot"><img src="raw_selected/04_设置TXT标准格式和保存目录.png" alt="设置TXT标准格式和保存目录"></div>
+    </section>
+
+    <section>
+      <div class="step">
+        <h2>5. 开始 OCR 并等待任务完成</h2>
+        <p>点击“开始任务”后等待识别完成。任务完成后，页面顶部会显示完成进度。本示例显示 <code>任务完成 144/144</code>。</p>
+      </div>
+      <div class="shot"><img src="raw_selected/05_OCR任务完成144-144.png" alt="OCR任务完成144/144"></div>
+    </section>
+
+    <section>
+      <div class="step">
+        <h2>6. 打开证据时间轴网页上传页面</h2>
+        <p>在浏览器中打开“律师证据图片时间轴整理工具”。页面需要上传图片 ZIP 包和 Umi-OCR 生成的 TXT 文件。</p>
+      </div>
+      <div class="shot"><img src="raw_selected/07_证据时间轴网页上传页面.png" alt="证据时间轴网页上传页面"></div>
+    </section>
+
+    <section>
+      <div class="step">
+        <h2>7. 上传 ZIP 和 TXT 文件</h2>
+        <p>分别点击两个“选择文件”按钮，选择图片 ZIP 包和 Umi-OCR 的 TXT 结果文件。确认两个文件都已显示在页面上后，点击“开始整理并生成文件”。</p>
+      </div>
+      <div class="shot"><img src="raw_selected/06_上传ZIP和TXT.png" alt="上传ZIP和TXT"></div>
+    </section>
+
+    <section>
+      <div class="step">
+        <h2>8. 查看处理结果并下载 Word</h2>
+        <p>网页处理完成后，会显示图片数、OCR 记录数、图片匹配数、明确时间数、需人工核对数等统计信息。点击“下载 Word 证据时间轴”下载生成的 Word 文件。</p>
+      </div>
+      <div class="shot"><img src="raw_selected/08_网页处理完成并下载Word.png" alt="网页处理完成并下载Word"></div>
+    </section>
+
+    <section>
+      <div class="step">
+        <h2>9. 在浏览器下载面板确认文件下载</h2>
+        <p>点击下载后，可以在浏览器右上角下载面板查看 Word 文件的下载进度。下载完成后，即可打开 Word 版证据时间轴进行人工复核。</p>
+      </div>
+      <div class="shot"><img src="raw_selected/09_浏览器下载面板.png" alt="浏览器下载面板"></div>
+    </section>
+
+    <div class="checklist">
+      <h2>发布前检查</h2>
+      <ul>
+        <li>桌面截图建议裁剪，只保留 Umi-OCR 图标和必要操作区域。</li>
+        <li>Umi-OCR 设置页中的 Windows 用户名、本地完整路径、案件文件夹名建议脱敏。</li>
+        <li>网页结果页中的任务编号、URL、浏览器标签页建议按发布场景决定是否遮挡。</li>
+        <li>涉及真实案件名称、联系人、账号、电话、邮箱的内容不应直接发布。</li>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>

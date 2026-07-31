@@ -917,3 +917,32 @@ button { font: inherit; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
+
+.tutorial-callout {
+  margin: 24px 28px 28px;
+  padding: 20px;
+  border: 1px solid rgba(23, 62, 54, .24);
+  background: rgba(255, 255, 255, .58);
+}
+.tutorial-callout h3 {
+  margin: 0 0 10px;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.45;
+}
+.tutorial-callout p:not(.section-index) {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+.tutorial-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tutorial-actions .button {
+  min-height: 42px;
+  padding: 8px 14px;
+  font-size: 12px;
+}

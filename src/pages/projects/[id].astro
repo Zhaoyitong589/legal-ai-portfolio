@@ -10,6 +10,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const poster = project.data.demoMedia.poster || project.data.cover;
+const tutorial = project.data.tutorialResources;
 const isCrossBorderExport = project.id === 'cross-border-export';
 const processSteps = [
   ['客户沟通', '直接与海外客户确认商务问题、合同关注点和后续履约信息。'],
@@ -287,6 +288,17 @@ const methodSteps = ['陌生问题', '拆分任务', '查询官方资料', '使�
             )}
           </div>
           <p>{project.data.demoWalkthrough.watchDemo}</p>
+          {tutorial && (
+            <div class="tutorial-callout" id="image-tutorial">
+              <p class="section-index">IMAGE TUTORIAL</p>
+              <h3>{tutorial.label || '图文教程'}</h3>
+              {tutorial.description && <p>{tutorial.description}</p>}
+              <div class="tutorial-actions">
+                <a class="button primary" href={withBase(tutorial.pageUrl)}>在线查看教程</a>
+                <a class="button quiet" href={withBase(tutorial.pdfUrl)}>下载 PDF 教程</a>
+              </div>
+            </div>
+          )}
         </section>
 
         <section class="story-section sample-grid" aria-label="样例输入输出">
@@ -348,3 +360,4 @@ const methodSteps = ['陌生问题', '拆分任务', '查询官方资料', '使�
   </article>
   )}
 </BaseLayout>
+

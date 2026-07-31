@@ -30,6 +30,13 @@ const demoMedia = z.object({
   demoVideo: z.string().optional()
 }).default({});
 
+const tutorialResources = z.object({
+  pageUrl: z.string(),
+  pdfUrl: z.string(),
+  label: z.string().optional(),
+  description: z.string().optional()
+}).optional();
+
 const projects = defineCollection({
   loader: glob({ base: './src/content/projects', pattern: '**/*.md' }),
   schema: z.object({
@@ -56,7 +63,8 @@ const projects = defineCollection({
     riskNote: z.string(),
     projectDetails,
     demoWalkthrough,
-    demoMedia
+    demoMedia,
+    tutorialResources
   })
 });
 
@@ -101,3 +109,4 @@ const talks = defineCollection({
 });
 
 export const collections = { projects, writing, talks };
+
