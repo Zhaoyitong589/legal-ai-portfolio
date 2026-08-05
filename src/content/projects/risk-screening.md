@@ -7,6 +7,7 @@ statuses: ["已上线"]
 featured: true
 order: 1
 tags: ["出口合规", "风险初筛", "中英文报告"]
+categories: ["in-house-legal", "legal-tech", "cross-border", "legal-operations"]
 cover: "images/projects/risk-screening.svg"
 externalUrl: "https://yangkewei2001-collab.github.io/trade-risk-screening-demo/"
 updatedAt: "2026-07-07"

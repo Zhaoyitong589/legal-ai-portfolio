@@ -3,15 +3,16 @@ import { siteMeta, withBase } from '../lib/site';
 
 const items = [
   ['首页', ''],
-  ['项目', 'projects/'],
-  ['文章', 'writing/'],
-  ['分享', 'talks/'],
-  ['背景', 'background/'],
-  ['联系', 'contact/']
+  ['关于我', '#about'],
+  ['能力地图', '#capability-map'],
+  ['项目作品', '#related-evidence'],
+  ['经历', 'background/'],
+  ['联系我', 'contact/']
 ];
 
 const current = Astro.url.pathname;
 const isActive = (path: string) => {
+  if (path.startsWith('#')) return false;
   const href = withBase(path);
   if (!path) return current === href || current === href.replace(/\/$/, '');
   return current.startsWith(href);
@@ -21,8 +22,8 @@ const isActive = (path: string) => {
 <header class="site-header">
   <div class="shell header-inner">
     <a class="brand" href={withBase()} aria-label={`${siteMeta.title}首页`}>
-      <span class="brand-mark" aria-hidden="true">法·AI</span>
-      <span class="brand-name">{siteMeta.title}</span>
+      <span class="brand-mark" aria-hidden="true">ZYT</span>
+      <span class="brand-name">{siteMeta.shortTitle}</span>
     </a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
       <span class="sr-only">展开导航</span>
@@ -30,7 +31,7 @@ const isActive = (path: string) => {
     </button>
     <nav id="site-nav" class="site-nav" aria-label="主导航">
       {items.map(([label, path]) => (
-        <a href={withBase(path)} aria-current={isActive(path) ? 'page' : undefined}>{label}</a>
+        <a href={path.startsWith('#') ? (current === withBase() || current === withBase('').replace(/\/$/, '') ? path : withBase(path)) : withBase(path)} aria-current={isActive(path) ? 'page' : undefined}>{label}</a>
       ))}
     </nav>
   </div>

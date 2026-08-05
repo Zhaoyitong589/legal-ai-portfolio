@@ -7,6 +7,7 @@ statuses: ["本地原型"]
 featured: true
 order: 2
 tags: ["证据整理", "OCR", "本地化原型", "Word 报告"]
+categories: ["legal-support", "legal-tech", "legal-operations"]
 cover: "images/projects/evidence-tool-ui-redacted.png"
 coverAlt: "证据时间轴整理原型的工具界面"
 coverCaption: "工具界面：上传图片 ZIP 包与 Umi-OCR 结果，提取时间并生成待核对材料。截图已脱敏。"

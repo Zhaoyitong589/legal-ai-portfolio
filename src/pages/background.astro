@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { fasuoExperience } from '../data/capabilities';
 
 const education = [
   {
@@ -17,6 +18,13 @@ const education = [
 ];
 
 const practice = [
+  {
+    organization: fasuoExperience.organization,
+    role: fasuoExperience.role,
+    date: fasuoExperience.date,
+    description: fasuoExperience.positioning,
+    responsibilities: fasuoExperience.responsibilities
+  },
   {
     organization: '陕西省博律师事务所',
     role: '律所 AI 化项目成员',
@@ -101,11 +109,12 @@ const awards = [
 ];
 ---
 
-<BaseLayout title="Background" description="法学训练、法律实务与跨领域实践，为理解法律 AI 的真实落地场景提供基础。">
+<BaseLayout title="Background" description="赵怡彤的法学教育、法律职业资格、制造业跨境合同、法索 AI 法律科技产品实践、涉外学习与项目交付经历。">
   <header class="page-hero background-hero shell">
     <p class="kicker">BACKGROUND / EXPERIENCE</p>
     <h1>Background</h1>
-    <p>法学训练、法律实务与跨领域实践，为我理解法律 AI 的真实落地场景提供了基础。</p>
+    <p>法学教育与法律职业资格、制造业及跨境合同实践、法索 AI 法律科技实习、涉外学习与成果交付，共同构成我的专业背景。</p>
+    <p class="background-about-fasuo">{fasuoExperience.about}</p>
     <div class="background-positioning">
       <span>个人定位</span>
       <strong>具有法学背景的法律 AI 实践者</strong>
@@ -161,9 +170,10 @@ const awards = [
           <article class="experience-entry">
             <div class="experience-topline">
               <h3>{item.organization}<small>{item.role}</small></h3>
-              <time>{item.date}</time>
+              {item.date && <time>{item.date}</time>}
             </div>
             <p>{item.description}</p>
+            {'responsibilities' in item && item.responsibilities && <ul class="experience-responsibilities">{item.responsibilities.map((responsibility) => <li>{responsibility}</li>)}</ul>}
           </article>
         ))}
       </div>

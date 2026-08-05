@@ -49,6 +49,7 @@ const projects = defineCollection({
     featured: z.boolean().default(false),
     order: z.number(),
     tags: z.array(z.string()),
+    categories: z.array(z.enum(['legal-support', 'in-house-legal', 'legal-tech', 'cross-border', 'legal-operations'])).default([]),
     cover: z.string(),
     coverAlt: z.string().optional(),
     coverCaption: z.string().optional(),

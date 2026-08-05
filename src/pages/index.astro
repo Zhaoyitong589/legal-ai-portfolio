@@ -1,270 +1,101 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CapabilityMap from '../components/CapabilityMap.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { withBase, formatDate } from '../lib/site';
-import { Image } from 'astro:assets';
-import avatar from '../assets/profile/zhao-yitong-avatar.png';
+import { capabilityMap, capabilityOrder, experienceEvidence } from '../data/capabilities';
+import FasuoPracticeGroup from '../components/FasuoPracticeGroup.astro';
 
-const projects = (await getCollection('projects'))
-  .filter((item) => item.data.featured)
-  .sort((a, b) => a.data.order - b.data.order);
-const latestWriting = (await getCollection('writing'))
-  .filter((item) => !item.data.draft)
-  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
-  .slice(0, 3);
+const projects = (await getCollection('projects')).filter((item) => item.data.featured).sort((a, b) => a.data.order - b.data.order);
+const latestWriting = (await getCollection('writing')).filter((item) => !item.data.draft).sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()).slice(0, 3);
 ---
 
 <BaseLayout>
-  <section class="hero shell">
-    <div class="hero-copy">
-      <p class="kicker">LEGAL AI · ADOPTION · WORKFLOW</p>
-      <h1>把法律 AI 原型讲清楚，<br /><em>也把使用边界讲清楚</em></h1>
-      <p class="hero-lead">
-        我关注法律 AI 从“技术可行”到“律师愿意使用”之间的落地问题。本作品集展示的是基于真实律所、外贸和法律服务场景的轻量原型，不是成熟商业 SaaS 产品。
-      </p>
-      <p class="hero-sublead">
-        本项目不定位为成熟法律科技产品的替代品，而是个人基于真实场景进行的 proof-of-concept 原型。通过该原型，我训练并展示了法律工作流拆解、用户需求表达、AI 辅助节点设计和人工复核边界意识。
-      </p>
-      <div class="hero-actions">
-        <a class="button primary" href={withBase('projects/')}>查看项目档案</a>
-        <a class="button quiet" href={withBase('background/')}>了解我的背景</a>
-      </div>
-    </div>
-    <aside class="hero-dossier" aria-label="个人定位摘要">
-      <div class="dossier-top">
-        <span>PORTFOLIO</span><strong>LEGAL AI POC</strong>
-      </div>
-      <p class="dossier-label">当前关注</p>
-      <ul>
-        <li><span>01</span> 从真实法律任务中拆出低风险小节点</li>
-        <li><span>02</span> 让输入、输出、依据和复核责任可解释</li>
-        <li><span>03</span> 用轻量原型展示 adoption bridge</li>
-      </ul>
-      <div class="dossier-stamp">求职展示中</div>
-    </aside>
-  </section>
+  <CapabilityMap />
 
-  <section class="positioning-banner shell">
-    <p>本项目不定位为成熟法律科技产品的替代品，而是个人基于真实场景进行的 proof-of-concept 原型。通过该原型，我训练并展示了法律工作流拆解、用户需求表达、AI 辅助节点设计和人工复核边界意识。</p>
-  </section>
-
-  <section class="portfolio-positioning shell" aria-labelledby="portfolio-positioning-heading">
-    <div>
-      <p class="section-index">PORTFOLIO POSITIONING</p>
-      <h2 id="portfolio-positioning-heading">作品集定位 / Portfolio Positioning</h2>
-    </div>
-    <div class="positioning-copy">
-      <p>这些 demo 不是成熟法律科技产品的竞品，也不是试图证明我已经做出完整商业化 SaaS。它们更接近 proof-of-concept：用可运行、可截图、可复盘的方式，把我对法律 AI 落地问题的理解呈现出来。</p>
-      <ul>
-        <li>价值不在“功能多”，而在展示真实场景观察和需求拆解。</li>
-        <li>每个原型都明确输入材料、输出结果和使用者需要做出的判断。</li>
-        <li>我重点设计 AI 辅助节点，同时标出人工复核边界和责任边界。</li>
-      </ul>
+  <section class="career-logic" aria-labelledby="career-logic-heading">
+    <div class="shell career-logic-inner">
+      <div><p class="section-index">ONE CONNECTED PRACTICE</p><h2 id="career-logic-heading">五种能力，一条完整的交付链路</h2></div>
+      <p>以法律训练判断问题，在企业与交易场景中理解约束，通过涉外能力处理跨境协作，再用法律科技方法提升流程清晰度，最终形成合同、SOP、产品原型和可复核成果。</p>
     </div>
   </section>
 
-  <section class="adoption-observation shell" aria-labelledby="adoption-observation-heading">
-    <div class="observation-heading">
-      <p class="section-index">OBSERVATION</p>
-      <h2 id="adoption-observation-heading">我的观察：法律 AI 的难点不只是模型能力，而是使用率</h2>
-    </div>
-    <div class="observation-grid">
-      <article>
-        <span>01</span>
-        <h3>阻力来自工作现场</h3>
-        <p>律师使用 AI 的阻力包括信任成本、学习成本、流程迁移成本和复核责任。模型能回答，不等于律师愿意把它放进真实工作流。</p>
-      </article>
-      <article>
-        <span>02</span>
-        <h3>轻量工具从小任务切入</h3>
-        <p>更现实的路径是从低风险、可复核、重复度高的小任务开始，让工具先承担整理、分类、提示和报告草拟等辅助工作。</p>
-      </article>
-      <article>
-        <span>03</span>
-        <h3>Demo 是 adoption bridge</h3>
-        <p>这些 demo 是 legal AI adoption bridge，而不是 feature competition。它们展示的是如何把法律任务拆成律师更容易信任和接管的步骤。</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="privacy-banner shell">
-    <strong>统一保密说明</strong>
-    <p>由于法律服务与外贸场景涉及客户信息、案件材料和业务保密要求，作品集中的演示均基于虚构或脱敏数据，仅用于展示产品逻辑、交互流程和输出结果。</p>
-  </section>
-
-  <section class="home-about shell" aria-labelledby="about-heading">
-    <Image
-      class="about-avatar"
-      src={avatar}
-      alt="赵一彤的个人头像"
-      width={320}
-      height={320}
-      quality={85}
-    />
-    <div class="about-copy">
-      <p class="kicker">ABOUT / 赵一彤</p>
-      <h2 id="about-heading">具有法律背景的法律 AI 原型实践者</h2>
-      <p>关注 AI 工具在法律实务中的可解释落地、风险控制与流程治理。</p>
-      <ul class="about-tags" aria-label="核心方向">
-        <li>法学训练</li>
-        <li>法律 AI 原型</li>
-        <li>风险控制</li>
-        <li>流程治理</li>
-      </ul>
-    </div>
-    <a class="text-link about-link" href={withBase('background/')}>查看完整背景 <span>→</span></a>
-  </section>
-
-  <section class="section shell">
+  <section class="section shell home-projects" id="related-evidence" aria-labelledby="evidence-heading">
     <div class="section-heading">
-      <div>
-        <p class="section-index">01 / 代表项目</p>
-        <h2>从真实任务到可解释原型</h2>
-      </div>
-      <a class="text-link" href={withBase('projects/')}>浏览全部项目 <span>→</span></a>
+      <div><p class="section-index">EXPERIENCE & PROJECTS / 相关经历与项目</p><h2 id="evidence-heading"><span id="evidence-heading-text">全部经历与项目</span></h2></div>
+      <div class="evidence-heading-actions"><button class="button quiet view-all-button" type="button">查看全部</button><a class="text-link" href={withBase('projects/')}>项目档案 <span>→</span></a></div>
     </div>
-    <div class="project-grid">
+    <nav class="category-anchors" aria-label="按岗位视角查看经历与项目">
+      {capabilityOrder.map((id) => (
+        <button type="button" data-filter={id} data-title={capabilityMap[id].title} data-evidence-ids={capabilityMap[id].evidenceIds.join(' ')}><strong>{capabilityMap[id].shortTitle}</strong><span>{capabilityMap[id].keywords}</span></button>
+      ))}
+    </nav>
+    <p class="current-filter" aria-live="polite">当前查看：<strong id="current-filter-label">全部经历与项目</strong></p>
+    <div class="evidence-grid">
+      {experienceEvidence.map((item) => (
+        <article class="experience-evidence-card evidence-item" id={item.id} data-evidence-id={item.id} data-capability-tags={item.capabilityTags.join(' ')}>
+          <p class="evidence-type">{item.type}</p>
+          <h3>{item.title}</h3>
+          <p class="evidence-summary">{item.summary}</p>
+          <div class="evidence-proof"><strong>这项经历证明了什么</strong><p>{item.proof.join('｜')}</p></div>
+          <ul class="project-category-tags" aria-label="关联能力">{item.capabilityTags.map((tag) => <li>{capabilityMap[tag].shortTitle}</li>)}</ul>
+          {item.id !== 'portfolio-site' && <a class="text-link" href={withBase('background/')}>查看背景详情 <span>→</span></a>}
+        </article>
+      ))}
       {projects.map((project) => <ProjectCard project={project} />)}
     </div>
+    <FasuoPracticeGroup />
   </section>
 
-  <section class="practice-map shell" aria-labelledby="practice-map-heading">
-    <div class="practice-map-heading">
-      <p class="section-index">02 / PRACTICE MAP</p>
-      <div>
-        <h2 id="practice-map-heading">Practice Map<span>我的实践路径</span></h2>
-        <p>我把法学训练、法律实务观察和 AI 原型实践连接起来，理解 AI 进入法律场景后的需求拆解、风险边界与治理问题。</p>
-      </div>
-    </div>
-
-    <ol class="practice-path">
-      <li class="practice-step">
-        <span class="practice-step-number">01</span>
-        <h3>Legal Foundation<small>法学训练</small></h3>
-        <ul>
-          <li>法学本科</li>
-          <li>法律职业资格 A 证</li>
-          <li>台北大学交换</li>
-          <li>IRAC 英文案例分析</li>
-          <li>IMAC 模拟仲裁</li>
-        </ul>
-      </li>
-      <li class="practice-step">
-        <span class="practice-step-number">02</span>
-        <h3>Legal Practice Context<small>真实法律场景</small></h3>
-        <ul>
-          <li>法院刑事庭实习</li>
-          <li>律所民事团队实习</li>
-          <li>律所 AI 化项目：产品筛选、需求拆分与 Demo</li>
-          <li>家族工厂外贸风控实践</li>
-          <li>证据、工时与跨境交易观察</li>
-        </ul>
-      </li>
-      <li class="practice-step">
-        <span class="practice-step-number">03</span>
-        <h3>Legal AI Prototyping<small>法律 AI 工具原型</small></h3>
-        <ul>
-          <li>出口合规风险初筛 Demo</li>
-          <li>证据时间轴整理原型</li>
-          <li>工时与加班费核算原型</li>
-          <li>AI 辅助需求拆解与开发</li>
-        </ul>
-      </li>
-      <li class="practice-step">
-        <span class="practice-step-number">04</span>
-        <h3>Governance & Risk Control<small>风险治理意识</small></h3>
-        <ul>
-          <li>AI 幻觉</li>
-          <li>法律依据可靠性</li>
-          <li>结果可验证与人工复核</li>
-          <li>数据安全与责任边界</li>
-          <li>流程治理</li>
-        </ul>
-      </li>
-    </ol>
-  </section>
-
-  <section class="method" aria-labelledby="method-heading">
-    <div class="shell">
-      <div class="method-heading">
-        <p class="section-index">03 / METHOD</p>
-        <div>
-          <h2 id="method-heading">Method<span>我的工作方法</span></h2>
-          <p>从真实法律场景出发，把模糊需求转化为可展示、可讨论、可复核的工具原型。</p>
-        </div>
-      </div>
-      <ol class="method-path">
-        <li>
-          <span>01</span>
-          <h3>Observe<small>场景观察</small></h3>
-          <p>从法院、律所、外贸合同、证据整理和劳动争议等场景中发现重复性问题。</p>
-        </li>
-        <li>
-          <span>02</span>
-          <h3>Structure<small>需求拆解</small></h3>
-          <p>把法律问题拆成输入字段、判断规则、输出报告和人工复核点。</p>
-        </li>
-        <li>
-          <span>03</span>
-          <h3>Prototype<small>工具原型</small></h3>
-          <p>使用 AI、Codex 与开源工具辅助搭建网页 Demo 或本地工具原型。</p>
-        </li>
-        <li>
-          <span>04</span>
-          <h3>Review<small>风险复核</small></h3>
-          <p>关注依据可靠性、结果可验证、人工复核、隐私脱敏和责任边界。</p>
-        </li>
-      </ol>
-    </div>
-  </section>
+  <section class="privacy-banner shell"><strong>保密与真实性说明</strong><p>作品集保留现有真实项目与公开链接；涉及案件、客户和交易的信息均使用虚构、脱敏材料或占位内容，不以工具输出替代专业判断。</p></section>
 
   <section class="section writing-preview">
     <div class="shell">
-      <div class="section-heading light-heading">
-        <div>
-          <p class="section-index">04 / 近期写作</p>
-          <h2>记录尚未定型的观察</h2>
-        </div>
-        <a class="text-link" href={withBase('writing/')}>查看全部文章 <span>→</span></a>
-      </div>
+      <div class="section-heading light-heading"><div><p class="section-index">WRITING / 近期写作</p><h2>记录法律、业务与技术交界处的观察</h2></div><a class="text-link" href={withBase('writing/')}>查看全部文章 <span>→</span></a></div>
       <div class="writing-list">
         {latestWriting.map((article, index) => (
           <a class="writing-row" href={article.data.externalUrl || withBase(`writing/${article.id}/`)} target={article.data.externalUrl ? '_blank' : undefined} rel={article.data.externalUrl ? 'noopener noreferrer' : undefined}>
-            <span class="row-number">{String(index + 1).padStart(2, '0')}</span>
-            <span class="row-main">
-              <strong>{article.data.title}</strong>
-              <small>{article.data.description}</small>
-            </span>
-            <span class="row-meta">{article.data.statuses.join(' / ')}<br />{formatDate(article.data.publishedAt)}</span>
-            <span class="row-arrow">→</span>
+            <span class="row-number">{String(index + 1).padStart(2, '0')}</span><span class="row-main"><strong>{article.data.title}</strong><small>{article.data.description}</small></span><span class="row-meta">{article.data.statuses.join(' / ')}<br />{formatDate(article.data.publishedAt)}</span><span class="row-arrow">→</span>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="current-focus shell" aria-labelledby="current-focus-heading">
-    <div class="current-focus-heading">
-      <p class="section-index">05 / CURRENT FOCUS</p>
-      <div>
-        <h2 id="current-focus-heading">Current Focus<span>近期关注</span></h2>
-        <p>围绕作品、公开表达与风险治理，持续推进可以被检验的法律 AI 实践。</p>
-      </div>
-    </div>
-    <ul class="focus-list">
-      <li>推进省博律所 AI 化项目：产品筛选反馈、需求拆分表与 Demo</li>
-      <li>准备律所两场 AI 使用培训（基础认知 + 进阶实操）</li>
-      <li>完善法律 AI 实践作品集</li>
-      <li>发布法律 AI 实务观察文章</li>
-      <li>参与人工智能安全与法治相关学习交流</li>
-      <li>持续关注可靠性、人工复核、数据安全与责任边界</li>
-    </ul>
-  </section>
+  <section class="closing-cta shell" id="contact"><p class="kicker">OPEN TO CONVERSATION</p><h2>让法律分析进入真实业务，<br />并形成清晰、可执行的成果</h2><a class="button primary" href={withBase('contact/')}>联系我</a></section>
 
-  <section class="closing-cta shell">
-    <p class="kicker">OPEN TO CONVERSATION</p>
-    <h2>如果你也在思考<br />法律与 AI 的真实交界处</h2>
-    <a class="button primary" href={withBase('contact/')}>和我聊聊</a>
-  </section>
+  <script>
+    const filters = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+    const evidenceItems = Array.from(document.querySelectorAll<HTMLElement>('.evidence-item'));
+    const heading = document.querySelector<HTMLElement>('#evidence-heading-text');
+    const currentLabel = document.querySelector<HTMLElement>('#current-filter-label');
+    const evidenceSection = document.querySelector<HTMLElement>('#related-evidence');
+    const fasuoGroup = document.querySelector<HTMLElement>('#fasuo-ai-practice');
+    const nodes = Array.from(document.querySelectorAll<HTMLButtonElement>('.capability-node'));
+
+    const showCapability = (id: string, title: string, evidenceIds: string[], scroll = true) => {
+      heading && (heading.textContent = `${title}：相关经历`);
+      currentLabel && (currentLabel.textContent = title);
+      filters.forEach((item) => item.classList.toggle('is-active', item.dataset.filter === id));
+      nodes.forEach((item) => { const selected = item.dataset.capability === id; item.classList.toggle('is-selected', selected); item.setAttribute('aria-pressed', String(selected)); });
+      evidenceItems.forEach((item) => {
+        const index = evidenceIds.indexOf(item.dataset.evidenceId || '');
+        item.hidden = index < 0;
+        item.style.order = index < 0 ? '' : String(index);
+      });
+      if (fasuoGroup) fasuoGroup.hidden = !['legal-tech', 'legal-operations'].includes(id);
+      if (scroll) (id === 'legal-tech' ? document.querySelector('#experience-fasuo') : evidenceSection)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    filters.forEach((filter) => filter.addEventListener('click', () => showCapability(filter.dataset.filter || '', filter.dataset.title || '', (filter.dataset.evidenceIds || '').split(' ').filter(Boolean))));
+    document.addEventListener('capability-select', ((event: CustomEvent) => showCapability(event.detail.id, event.detail.title, event.detail.evidenceIds)) as EventListener);
+    document.querySelector('.view-all-button')?.addEventListener('click', () => {
+      heading && (heading.textContent = '全部经历与项目'); currentLabel && (currentLabel.textContent = '全部经历与项目');
+      filters.forEach((item) => item.classList.remove('is-active'));
+      nodes.forEach((item) => { item.classList.remove('is-selected'); item.setAttribute('aria-pressed', 'false'); });
+      evidenceItems.forEach((item) => { item.hidden = false; item.style.order = ''; });
+      if (fasuoGroup) fasuoGroup.hidden = false;
+    });
+  </script>
 </BaseLayout>

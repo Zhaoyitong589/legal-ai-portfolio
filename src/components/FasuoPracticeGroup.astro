@@ -1,0 +1,37 @@
+---
+import { fasuoExperience, fasuoProjects } from '../data/capabilities';
+import { withBase } from '../lib/site';
+---
+
+<section class="fasuo-practice-group" id="fasuo-ai-practice" data-project-group="legal-tech legal-operations" aria-labelledby="fasuo-practice-heading">
+  <header class="fasuo-practice-heading">
+    <div>
+      <p class="section-index">FASUO AI PRODUCT PRACTICE</p>
+      <h2 id="fasuo-practice-heading">法索 AI 产品实践</h2>
+    </div>
+    <p>围绕法律 AI 产品的实际使用场景，对功能进行完整体验、流程拆解、测试记录和内容转化，并形成面向用户、运营和内部协作的多类交付成果。</p>
+  </header>
+  <p class="role-relevance"><strong>相关能力：</strong>{fasuoExperience.capabilityTags.join('、')}。</p>
+  <div class="fasuo-project-grid">
+    {fasuoProjects.map((project, index) => (
+      <article class="fasuo-project-card" id={project.id}>
+        {'image' in project && project.image ? (
+          <figure><img src={withBase(project.image)} alt={project.imageAlt} loading="lazy" /></figure>
+        ) : (
+          <div class="fasuo-card-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
+        )}
+        <div class="fasuo-card-body">
+          <h3>{project.name}</h3>
+          <dl>
+            <div><dt>项目背景</dt><dd>{project.background}</dd></div>
+            <div><dt>我的工作</dt><dd>{project.work}</dd></div>
+            <div><dt>使用方法或工具</dt><dd>{project.methods.join(' · ')}</dd></div>
+            <div><dt>最终交付物</dt><dd>{project.deliverables.join(' · ')}</dd></div>
+          </dl>
+          <ul class="project-category-tags" aria-label="项目能力标签">{project.tags.map((tag) => <li>{tag}</li>)}</ul>
+          {'tutorialUrl' in project && project.tutorialUrl && <a class="text-link" href={withBase(project.tutorialUrl)}>查看现有图文教程 <span>→</span></a>}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

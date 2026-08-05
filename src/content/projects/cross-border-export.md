@@ -7,6 +7,7 @@ statuses: ["真实业务案例"]
 featured: true
 order: 0
 tags: ["真实业务", "跨境合同", "英文沟通", "出口报关", "流程建设"]
+categories: ["legal-support", "in-house-legal", "cross-border", "legal-operations"]
 cover: "images/projects/cross-border-export/cover.svg"
 coverAlt: "跨境出口流程建设案例的档案式封面"
 coverCaption: "CBT—001：制造企业首次跨境出口流程建设案例。"

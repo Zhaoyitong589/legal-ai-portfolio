@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import avatar from '../assets/profile/zhao-yitong-avatar.png';
+import { capabilityMap, capabilityOrder } from '../data/capabilities';
+const capabilities = capabilityOrder.map((id) => ({ id, ...capabilityMap[id] }));
+---
+
+<section class="capability-hero shell" id="capability-map" aria-labelledby="portfolio-title">
+  <div class="capability-intro">
+    <p class="portfolio-overline">ZHAO YITONG PORTFOLIO</p>
+    <h1 id="portfolio-title">赵怡彤个人作品集</h1>
+    <p>法律专业基础 <span>→</span> 企业与交易场景 <span>→</span> 涉外与跨境能力 <span>→</span> 法律科技方法 <span>→</span> 可交付成果</p>
+  </div>
+  <div class="capability-orbit">
+    <div class="orbit-lines" aria-hidden="true"></div>
+    <div class="profile-core" id="about">
+      <Image class="profile-photo" src={avatar} alt="赵怡彤个人照片" width={248} height={248} quality={90} loading="eager" />
+      <div class="profile-copy">
+        <h2>赵怡彤</h2>
+        <p class="profile-fields">法学背景｜企业实践｜法律科技｜跨境业务</p>
+        <ul aria-label="教育与资格"><li>西北政法大学法学本科</li><li>法律职业资格 A 证</li><li>同济大学法律硕士在读</li></ul>
+        <p class="profile-positioning">把法律分析转化为合同、流程、产品与可执行解决方案</p>
+        <p class="profile-english">Legal · Business · Technology · Cross-border</p>
+      </div>
+    </div>
+    {capabilities.map((item) => (
+      <button class={`capability-node node-${item.position}`} type="button" data-capability={item.id} data-evidence-ids={item.evidenceIds.join(' ')} data-title={item.title} aria-controls="related-evidence" aria-pressed="false">
+        <span class="node-heading"><span class="node-icon" aria-hidden="true">
+          {item.icon === 'search' && <svg viewBox="0 0 24 24"><path d="M4 4h10v16H4zM7 8h4M7 12h4M15 15l5 5M16.5 16.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" /></svg>}
+          {item.icon === 'contract' && <svg viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5zM15 3v5h4M8 12h8M8 16h6" /></svg>}
+          {item.icon === 'nodes' && <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="7" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="m8.3 6.4 7.2.4M7.3 8.1l3.6 7.6M16.8 9l-3.6 6.7"/></svg>}
+          {item.icon === 'globe' && <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>}
+          {item.icon === 'workflow' && <svg viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M9 5.5h5a3 3 0 0 1 3 3V16M14 13l3 3 3-3"/></svg>}
+        </span><strong>{item.title}</strong></span>
+        <span class="node-keywords">{item.keywords}</span>
+        <span class="node-detail"><span>{item.description}</span><span class="evidence-tags">{item.evidence.map((tag) => <em>{tag}</em>)}</span><small>点击查看相关项目与经历 ↓</small></span>
+      </button>
+    ))}
+  </div>
+</section>
+
+<script>
+  const nodes = Array.from(document.querySelectorAll<HTMLButtonElement>('.capability-node'));
+  nodes.forEach((node) => node.addEventListener('click', () => {
+    nodes.forEach((item) => { const selected = item === node; item.classList.toggle('is-selected', selected); item.setAttribute('aria-pressed', String(selected)); });
+    document.dispatchEvent(new CustomEvent('capability-select', { detail: {
+      id: node.dataset.capability,
+      title: node.dataset.title,
+      evidenceIds: (node.dataset.evidenceIds || '').split(' ').filter(Boolean)
+    }}));
+  }));
+</script>

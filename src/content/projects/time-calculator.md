@@ -7,6 +7,7 @@ statuses: ["已上线"]
 featured: true
 order: 3
 tags: ["劳动争议", "加班费核算", "规则引擎", "AI 报告"]
+categories: ["legal-support", "in-house-legal", "legal-tech", "legal-operations"]
 cover: "images/projects/overtime-tool-ui-redacted.png"
 coverAlt: "劳动工时与加班费核算原型的界面"
 coverCaption: "工具界面：录入日期、工资基数、工时制度并上传工时 Excel。截图已脱敏。"
