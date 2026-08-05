@@ -1,0 +1,57 @@
+---
+import { englishTranslations } from '../data/translations';
+---
+
+<div class="language-switcher" role="group" aria-label="语言选择" data-i18n-ignore>
+  <button type="button" data-language-choice="zh" aria-pressed="true">中文</button>
+  <span aria-hidden="true">/</span>
+  <button type="button" data-language-choice="en" aria-pressed="false">EN</button>
+</div>
+
+<script is:inline define:vars={{ englishTranslations }}>
+  (() => {
+    const storageKey = 'portfolio-language';
+    const originals = new WeakMap();
+    const originalTitle = document.title;
+    let activeLanguage = localStorage.getItem(storageKey) === 'en' ? 'en' : 'zh';
+
+    const translateText = (node) => {
+      if (node.parentElement?.closest('[data-i18n-ignore], script, style')) return;
+      if (!originals.has(node)) originals.set(node, node.nodeValue || '');
+      const original = originals.get(node) || '';
+      if (activeLanguage === 'zh') { node.nodeValue = original; return; }
+      const trimmed = original.trim();
+      const translated = englishTranslations[trimmed];
+      if (!translated) return;
+      node.nodeValue = original.replace(trimmed, translated);
+    };
+
+    const applyLanguage = (language) => {
+      activeLanguage = language === 'en' ? 'en' : 'zh';
+      localStorage.setItem(storageKey, activeLanguage);
+      document.documentElement.lang = activeLanguage === 'en' ? 'en' : 'zh-CN';
+      document.documentElement.dataset.language = activeLanguage;
+      document.querySelectorAll('[data-language-choice]').forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.languageChoice === activeLanguage));
+      });
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      while (walker.nextNode()) translateText(walker.currentNode);
+      document.title = activeLanguage === 'en' ? 'Zhao Yitong Portfolio | Legal, In-house, Legal Tech & Cross-border' : originalTitle;
+      document.dispatchEvent(new CustomEvent('portfolio-language-change', { detail: { language: activeLanguage } }));
+    };
+
+    document.querySelectorAll('[data-language-choice]').forEach((button) => button.addEventListener('click', () => applyLanguage(button.dataset.languageChoice)));
+    const observer = new MutationObserver((records) => {
+      if (activeLanguage !== 'en') return;
+      records.forEach((record) => record.addedNodes.forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE) translateText(node);
+        else if (node.nodeType === Node.ELEMENT_NODE) {
+          const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+          while (walker.nextNode()) translateText(walker.currentNode);
+        }
+      }));
+    });
+    applyLanguage(activeLanguage);
+    observer.observe(document.body, { childList: true, subtree: true, characterData: false });
+  })();
+</script>
