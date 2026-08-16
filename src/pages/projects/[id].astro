@@ -14,6 +14,7 @@ const tutorial = project.data.tutorialResources;
 const isCrossBorderExport = project.id === 'cross-border-export';
 const isEmploymentWorkflow = project.id === 'employment-legal-workflow';
 const isEmploymentApplication = project.id === 'time-calculator' || project.id === 'evidence-organizer';
+const isRiskScreening = project.id === 'risk-screening';
 const employmentSteps = [
   ['ISSUE', '先判断真正的问题是什么', '先定位劳动关系阶段：招聘入职、合同与试用期、工时薪酬、绩效与岗位调整、违纪调查、解除终止、离职义务或劳动争议。先定义问题，再决定需要查什么。'],
   ['FACTS & DOCUMENTS', '确认事实和现有材料', '核对劳动合同、员工手册、考勤与工资、绩效、邮件沟通、培训、处分、签收等记录。劳动问题既要判断发生了什么，也要判断公司能够证明什么。'],
@@ -444,6 +445,25 @@ const methodSteps = [
             <p>{project.data.projectDetails.nextIteration}</p>
           </div>
         </section>
+        {isRiskScreening && (
+          <>
+            <section class="story-section early-reflection" id="what-this-project-taught-me">
+              <p class="section-index">WHAT THIS PROJECT TAUGHT ME</p>
+              <h2>从“做一个筛查工具”到理解专业边界</h2>
+              <p>这是我较早期的 Legal Tech 原型。当时我希望把复杂的电力设备出口交易拆解成结构化风险维度。后来真正参与制造企业跨境出口项目后，我逐渐意识到，出口管制、制裁、产品技术属性、FAT / SAT 和技术标准等问题，不能由一个通用工具直接判断。</p>
+              <p>工具更适合提醒需要关注的问题、收集必要事实、把事项路由给正确的专业人员，并提供人工复核清单。最终判断仍需结合最新官方规则、真实交易事实和法律、技术、业务人员的专业意见。</p>
+              <strong>从“自动给答案”，到“帮助识别问题并正确升级”。<small>From automated answers to structured escalation.</small></strong>
+            </section>
+            <section class="story-section boundary-pair" id="capability-boundary">
+              <div><p class="section-index">WHAT I CAN DEFEND</p><h2>我能够说明的能力</h2><ul><li>将复杂交易拆成结构化风险类别</li><li>设计事实收集表单</li><li>把风险提示转化为人工核验事项</li><li>利用规则与工具扩大 issue spotting 覆盖率</li><li>识别何时应升级给其他专业人员</li><li>根据真实业务经验修正早期产品思路</li></ul></div>
+              <div><p class="section-index">SPECIALIST REVIEW</p><h2>需要专业复核</h2><ul><li>出口管制适用性与特定司法辖区最新法律</li><li>制裁名单与相关限制</li><li>Dual-use technical classification</li><li>产品技术标准与设备规格</li><li>FAT / SAT 技术要求</li></ul></div>
+            </section>
+            <section class="story-section what-came-next" id="what-came-next">
+              <div><p class="section-index">WHAT CAME NEXT</p><h2>后来的真实业务实践</h2><p>后来真正参与制造企业首笔直接海外订单后，我开始把注意力从“覆盖更多风险点”转向合同判断、客户沟通、付款、履约、物流、内部协作和专业边界。</p></div>
+              <a class="button primary" href={withBase('projects/cross-border-export/')}>查看真实跨境出口项目 →</a>
+            </section>
+          </>
+        )}
       </div>
 
       <aside class="story-aside">

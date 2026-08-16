@@ -1,28 +1,28 @@
 ---
-title: "电力设备出口法律与合规风险初筛 Demo"
-eyebrow: "DEMO 01"
-summary: "以变压器、电力设备出口为场景，将外贸交易中的出口管制、制裁筛查、付款风险、贸易术语、技术验收和争议解决等问题转化为结构化问卷，并生成中英文风险初筛报告。"
-oneLine: "用虚构外贸合同条款演示交易前风险初筛和中英文报告生成。"
-statuses: ["已上线"]
-featured: true
-order: 1
-tags: ["出口合规", "风险初筛", "中英文报告"]
+title: "电力设备出口风险识别原型"
+eyebrow: "EARLY EXPLORATION"
+summary: "早期尝试将电力设备出口交易中的合同、付款、物流、出口管制、制裁和技术验收等风险入口进行结构化，用于探索 Legal Tech 在交易前 issue spotting 与 escalation 中的可能形式。"
+oneLine: "将复杂出口交易拆成结构化风险入口，探索工具如何支持事实收集、问题识别和专业升级。"
+statuses: ["早期探索"]
+featured: false
+order: 9
+tags: ["Issue Spotting", "结构化表单", "人工升级"]
 categories: ["in-house-legal", "legal-tech", "cross-border", "legal-operations"]
 cover: "images/projects/risk-screening.svg"
 externalUrl: "https://yangkewei2001-collab.github.io/trade-risk-screening-demo/"
 updatedAt: "2026-07-07"
 riskNote: "本工具为流程演示与辅助分析原型，不构成法律意见。所有输出结果均需由专业人员结合原始材料、现行法律依据和案件事实进行复核。"
 projectDetails:
-  painPoint: "中小外贸场景中，业务人员常能识别商业风险，却难以系统梳理出口管制、制裁、付款、贸易术语、验收和争议解决等法律合规问题。"
+  painPoint: "复杂出口交易的风险入口分散在合同、付款、物流、技术材料与专业合规事项中；早期探索的重点是如何先把问题结构化，而不是由工具直接判断。"
   targetUsers: "外贸业务人员、法务、合规助理，以及需要进行交易前风险初筛的法律服务团队。"
   inputs: "交易国家/地区、产品类型、交易对手、付款安排、贸易术语、验收安排、合同争议解决条款等问卷信息。"
-  outputs: "中英文风险初筛报告、风险维度提示、后续人工核查清单。"
-  currentForm: "在线网页 Demo，用于展示风险初筛流程和问卷结构。"
+  outputs: "中英文 issue-spotting 报告、缺失事实提示、建议复核人员和后续行动清单。"
+  currentForm: "在线早期探索原型，用于展示事实收集、问题识别和 escalation 结构。"
   aiRole: "AI 辅助梳理风险维度、组织中英文报告表达，并将问卷答案转化为结构化提示。"
-  humanReviewBoundary: "专业人员需复核交易背景、产品管制属性、制裁名单、合同文本、付款路径和现行法律依据。"
+  humanReviewBoundary: "合同商业事项由 Legal 与业务协同复核；制裁和出口管制需 Trade Compliance / Legal 依据最新官方来源核验；产品属性、技术标准和 FAT / SAT 需 Technical / Quality 确认。"
   limitations: "Demo 不连接实时制裁数据库和出口管制数据库，不能替代正式尽调或律师审查。"
   nextIteration: "增加依据版本标注、风险分级规则、更多设备类型测试场景和人工复核清单导出。"
-  capabilityProof: "证明我能把真实外贸法律风险拆成业务人员可填写、法务可复核、报告可沟通的初筛流程。"
+  capabilityProof: "证明我能在不熟悉复杂领域时结构化风险入口、设计事实收集表单，并识别何时需要交给正确的专业人员。"
 demoWalkthrough:
   watchDemo: "查看虚构电力设备出口交易从合同条款录入，到风险维度提示和中英文报告生成的流程。"
   sampleInput: "虚构买卖双方、模拟付款条款、争议解决条款、保密条款、交付条款和验收安排。"
