@@ -12,6 +12,18 @@ const { project } = Astro.props;
 const poster = project.data.demoMedia.poster || project.data.cover;
 const tutorial = project.data.tutorialResources;
 const isCrossBorderExport = project.id === 'cross-border-export';
+const isEmploymentWorkflow = project.id === 'employment-legal-workflow';
+const isEmploymentApplication = project.id === 'time-calculator' || project.id === 'evidence-organizer';
+const employmentSteps = [
+  ['ISSUE', '先判断真正的问题是什么', '先定位劳动关系阶段：招聘入职、合同与试用期、工时薪酬、绩效与岗位调整、违纪调查、解除终止、离职义务或劳动争议。先定义问题，再决定需要查什么。'],
+  ['FACTS & DOCUMENTS', '确认事实和现有材料', '核对劳动合同、员工手册、考勤与工资、绩效、邮件沟通、培训、处分、签收等记录。劳动问题既要判断发生了什么，也要判断公司能够证明什么。'],
+  ['RULES', '建立法律路径', '根据具体事实查询法律、行政法规、司法解释、地方规则、相关案例和公司内部制度，先形成可能路径，再核对具体规则。'],
+  ['PROCEDURE', '实体判断和程序一起检查', '除实体权利外，继续检查通知、培训或调岗、内部审批、制度建立与公示，以及时间节点等程序风险。'],
+  ['EVIDENCE', '把举证问题前置', '在采取管理措施时就确认谁掌握证据、需要保存什么、是否形成书面记录、员工是否确认签收，以及材料能否组成完整时间线。'],
+  ['OPTIONS & BUSINESS IMPACT', '不只给一个法律答案', '比较继续管理、培训或调岗、协商、依法解除等路径，同时衡量法律与举证风险、时间和经济成本、员工关系影响及执行难度。'],
+  ['STAKEHOLDERS', 'HR、业务和 Legal 协同', '不自行假设管理事实；与 HR、直属业务负责人、财务及必要职能确认实际情况、业务目标和执行条件。'],
+  ['RECOMMENDATION & DOCUMENTATION', '形成建议并留下记录', '综合依据、事实、程序、证据、公司制度、目标、成本与风险形成可执行建议，并沉淀处理记录、关键文件、时间线、决策依据、模板、SOP 和后续事项。']
+];
 const processSteps = [
   ['客户沟通', '直接与海外客户确认商务问题、合同关注点和后续履约信息。'],
   ['NNN 协议', '围绕保密、禁止使用、禁止绕行及争议解决条款推进修订。'],
@@ -266,6 +278,37 @@ const methodSteps = [
         if (event.target === lightbox) lightbox.close();
       });
     </script>
+  ) : isEmploymentWorkflow ? (
+  <article class="employment-workflow-page">
+    <header class="detail-hero workflow-hero shell">
+      <a class="back-link" href={withBase('projects/')}>← 返回项目列表</a>
+      <div class="detail-title-grid">
+        <div><div class="detail-kicker-row"><p class="kicker">EMPLOYMENT LEGAL WORKFLOW</p><span class="status-badge" data-status="方法框架">方法框架</span></div><h1>企业劳动事务处理框架</h1></div>
+        <p class="detail-summary">从问题识别、事实确认和法律分析，到程序、证据、方案比较与跨职能协同，形成可以继续验证和执行的建议。</p>
+      </div>
+      <p class="workflow-boundary">我目前尚没有系统的企业劳动雇佣实务经验。这套框架来自法学训练、劳动法课程、Legal Tech 项目实践，以及对企业劳动事务处理方式的持续整理。</p>
+    </header>
+
+    <div class="workflow-sections shell">
+      <nav class="workflow-overview" aria-label="企业劳动事务处理流程">
+        {['ISSUE','FACTS','RULES','PROCEDURE','EVIDENCE','OPTIONS','STAKEHOLDERS','RECOMMENDATION'].map((step, index) => <><span>{step}</span>{index < 7 && <i>→</i>}</>)}
+      </nav>
+      <section class="workflow-step-grid" aria-label="工作框架详解">
+        {employmentSteps.map(([label, title, text], index) => (
+          <article><span>{String(index + 1).padStart(2, '0')} / {label}</span><h2>{title}</h2><p>{text}</p>{label === 'PROCEDURE' && <strong>Substance + Procedure</strong>}</article>
+        ))}
+      </section>
+
+      <section class="workflow-applications" id="selected-applications">
+        <p class="section-index">SELECTED APPLICATIONS</p><h2>相关实践</h2>
+        <div class="application-bridge"><strong>一个解决“规则应该如何计算”，一个解决“事实能够如何证明”。</strong><small>Rules determine entitlement. Evidence determines what can be proved.</small></div>
+        <div class="application-grid">
+          <article><span>APPLICATION 01 · 规则与计算</span><h3>劳动工时与加班费核算原型</h3><p>将工时、加班和薪酬规则拆解为结构化计算逻辑，探索企业劳动规则如何转化为可重复核验的计算与报告流程。</p><div>Rules → Calculation → Review → Report</div><a class="text-link" href={withBase('projects/time-calculator/')}>查看完整项目 <b>→</b></a></article>
+          <article><span>APPLICATION 02 · 事实与证据</span><h3>证据时间轴整理原型</h3><p>将聊天记录、截图及其他非结构化材料转换为可核查时间线，探索劳动争议场景中事实、时间和证据如何被结构化整理。</p><div>Raw Evidence → OCR → Timeline → Human Review</div><a class="text-link" href={withBase('projects/evidence-organizer/')}>查看完整项目 <b>→</b></a></article>
+        </div>
+      </section>
+    </div>
+  </article>
   ) : (
   <article class="detail-page">
     <header class="detail-hero shell">
@@ -297,6 +340,9 @@ const methodSteps = [
 
     <section class="project-story shell" aria-label="项目展示结构">
       <div class="story-main">
+        {isEmploymentApplication && (
+          <a class="related-workflow-link" href={withBase('projects/employment-legal-workflow/')}>{project.id === 'time-calculator' ? 'Part of Employment Legal Workflow' : 'Related Workflow: Employment Legal Workflow'} <span>→</span></a>
+        )}
         <section class="story-section" id="project-overview">
           <p class="section-index">PROJECT OVERVIEW</p>
           <h2>Project Overview</h2>

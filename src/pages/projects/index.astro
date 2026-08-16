@@ -7,17 +7,17 @@ import FasuoPracticeGroup from '../../components/FasuoPracticeGroup.astro';
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="项目" description="法律 AI 工具原型与实践项目档案。">
+<BaseLayout title="项目" description="真实业务案例、企业法务、Legal Tech 与法律运营项目档案。">
   <header class="page-hero shell">
     <p class="kicker">PROJECT ARCHIVE</p>
-    <h1>法律 AI 项目档案</h1>
-    <p>目前收录真实业务案例、风险筛查、证据整理和工时核算项目。每个项目都说明执行流程、样例输入输出、当前形态和保密边界，方便快速理解真实任务如何被拆解、验证和沉淀。</p>
+    <h1>项目与实践档案</h1>
+    <p>真实业务案例 · 企业法务 · Legal Tech · 法律运营。每个条目说明任务如何被拆解、验证和沉淀，并标注当前形态与专业边界。</p>
   </header>
   <section class="shell page-section">
     <div class="archive-note">
       <span>收录项目 {String(projects.length).padStart(2, '0')}</span>
       <span>真实业务案例 / 已上线 / 本地原型 / 待部署</span>
-      <span>最后更新：2026.07.18</span>
+      <span>最后更新：2026.08.16</span>
     </div>
     <div class="privacy-banner">
       <strong>统一保密说明</strong>

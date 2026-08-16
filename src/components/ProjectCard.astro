@@ -10,6 +10,7 @@ const { project } = Astro.props;
 const poster = project.data.demoMedia.poster || project.data.cover;
 const previewImage = project.data.demoMedia.previewAnimation || poster;
 const isCaseStudy = project.id === 'cross-border-export';
+const isWorkflow = project.id === 'employment-legal-workflow';
 const categoryLabels = {
   'legal-support': '法律研究与律师支持',
   'in-house-legal': '企业法务与合同管理',
@@ -19,19 +20,20 @@ const categoryLabels = {
 };
 const projectProof: Record<string, string[]> = {
   'cross-border-export': ['真实企业法务场景', '商业合同', '跨境交易', '风险控制'],
+  'employment-legal-workflow': ['问题识别', '程序与证据', '跨职能协同', '流程化思维'],
   'evidence-organizer': ['证据整理', '律师工作流', '工具原型', '教程交付'],
   'risk-screening': ['交易风险', '双语报告', '需求结构化', '网页原型'],
   'time-calculator': ['法律规则', '争议支持', '规则引擎', '报告交付']
 };
 ---
 
-<article class:list={['project-card', 'demo-project-card', 'evidence-item', { 'case-study-card': isCaseStudy }]} data-evidence-id={project.id} data-capability-tags={project.data.categories.join(' ')}>
+<article class:list={['project-card', 'demo-project-card', 'evidence-item', { 'case-study-card': isCaseStudy, 'workflow-card': isWorkflow }]} data-evidence-id={project.id} data-capability-tags={project.data.categories.join(' ')}>
   <a
     class:list={['demo-preview', { 'case-preview': isCaseStudy }]}
-    href={withBase(isCaseStudy ? `projects/${project.id}/` : `projects/${project.id}/#demo-walkthrough`)}
-    aria-label={isCaseStudy ? `查看${project.data.title}案例` : `观看${project.data.title}演示`}
+    href={withBase((isCaseStudy || isWorkflow) ? `projects/${project.id}/` : `projects/${project.id}/#demo-walkthrough`)}
+    aria-label={isWorkflow ? `查看${project.data.title}` : isCaseStudy ? `查看${project.data.title}案例` : `观看${project.data.title}演示`}
   >
-    {!isCaseStudy && (
+    {!isCaseStudy && !isWorkflow && (
       <video
         autoplay
         muted
@@ -44,9 +46,11 @@ const projectProof: Record<string, string[]> = {
         {project.data.demoMedia.previewVideo && <source src={withBase(project.data.demoMedia.previewVideo)} type="video/mp4" />}
       </video>
     )}
-    {(!project.data.demoMedia.previewVideo || isCaseStudy) && <img src={withBase(isCaseStudy ? poster : previewImage)} alt={project.data.coverAlt || ''} loading="lazy" />}
+    {isWorkflow ? (
+      <div class="workflow-preview-content"><span>ISSUE</span><i>→</i><span>FACTS</span><i>→</i><span>RULES</span><i>→</i><span>RECOMMENDATION</span></div>
+    ) : (!project.data.demoMedia.previewVideo || isCaseStudy) && <img src={withBase(isCaseStudy ? poster : previewImage)} alt={project.data.coverAlt || ''} loading="lazy" />}
     <span class="project-number">{project.data.eyebrow}</span>
-    <span class="preview-label">{isCaseStudy ? 'CASE STUDY / 真实业务案例' : 'GIF Preview / 演示预览'}</span>
+    <span class="preview-label">{isWorkflow ? 'WORKFLOW / 方法框架' : isCaseStudy ? 'CASE STUDY / 真实业务案例' : 'GIF Preview / 演示预览'}</span>
   </a>
   <div class="card-body">
     <ul class="project-category-tags" aria-label="项目能力分类">
@@ -62,11 +66,11 @@ const projectProof: Record<string, string[]> = {
     <p class="project-one-line">{project.data.oneLine}</p>
     <div class="evidence-proof"><strong>这项经历证明了什么</strong><p>{projectProof[project.id].join('｜')}</p></div>
     <p class="project-privacy-line">
-      {isCaseStudy ? '真实业务案例；公开页面仅展示脱敏流程和占位材料。' : '演示均使用虚构或脱敏数据，不展示真实业务材料。'}
+      {isWorkflow ? '方法框架；明确标注当前经验边界，并连接已有实践。' : isCaseStudy ? '真实业务案例；公开页面仅展示脱敏流程和占位材料。' : '演示均使用虚构或脱敏数据，不展示真实业务材料。'}
     </p>
     <div class="project-card-actions">
-      {isCaseStudy ? (
-        <a class="button primary" href={withBase(`projects/${project.id}/`)}>查看案例</a>
+      {isCaseStudy || isWorkflow ? (
+        <a class="button primary" href={withBase(`projects/${project.id}/`)}>{isWorkflow ? '查看工作框架' : '查看案例'}</a>
       ) : (
         <>
           <a class="button primary" href={withBase(`projects/${project.id}/#demo-walkthrough`)}>观看演示</a>
