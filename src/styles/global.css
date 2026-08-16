@@ -573,6 +573,28 @@ button { font: inherit; }
   min-width: 0; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.85;
   overflow-wrap: break-word; word-break: normal;
 }
+.case-label { color: var(--gold) !important; font-size: 10px !important; font-weight: 800; letter-spacing: .14em; }
+.confidentiality-case { margin-top: 34px; padding: 28px; border: 1px solid var(--line); background: rgba(220,231,224,.3); }
+.confidentiality-case header { display: grid; grid-template-columns: 150px minmax(0,1fr); gap: 6px 26px; }
+.confidentiality-case header .case-label { grid-row: 1 / 3; }
+.confidentiality-case h3 { margin: 0; font-family: var(--serif); font-size: clamp(22px,2.4vw,30px); }
+.confidentiality-case header > p:last-child { margin-top: 4px; font-size: 13px; }
+.reasoning-flow { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); margin: 28px 0 0; padding: 0; border-top: 1px solid var(--line); list-style: none; }
+.reasoning-flow li { min-width: 0; padding: 20px 16px; border-right: 1px solid var(--line); }
+.reasoning-flow li:first-child { padding-left: 0; }
+.reasoning-flow li:last-child { padding-right: 0; border-right: 0; }
+.reasoning-flow span { display: block; margin-bottom: 12px; color: var(--gold); font-family: var(--serif); font-size: 12px; }
+.reasoning-flow h4 { margin: 0 0 9px; color: var(--ink); font-family: var(--serif); font-size: 16px; line-height: 1.4; }
+.reasoning-flow p { font-size: 12px !important; line-height: 1.75 !important; }
+.confidentiality-case blockquote { margin: 4px 0 16px; padding: 18px 20px; color: var(--ink); border-left: 3px solid var(--green); background: rgba(255,255,255,.6); font-family: var(--serif); font-size: 16px; line-height: 1.8; }
+.case-takeaway { max-width: none !important; color: var(--ink) !important; font-weight: 650; }
+.second-review { display: grid; grid-template-columns: .8fr 1.2fr; gap: 32px; margin-top: 20px; padding: 24px 26px; border: 1px solid rgba(23,62,54,.18); background: rgba(255,255,255,.48); }
+.second-review h3 { margin: 8px 0 18px; font-family: var(--serif); font-size: 21px; line-height: 1.45; }
+.second-review p { font-size: 13px !important; line-height: 1.8 !important; }
+.second-review > div:last-child { display: grid; gap: 12px; }
+.second-review strong { color: var(--ink); font-size: 13px; line-height: 1.8; }
+.review-path { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; color: var(--green); font-size: 10px; font-weight: 700; }
+.review-path i, .document-lifecycle i { color: var(--gold); font-style: normal; }
 .evidence-gallery {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px;
   margin-top: 30px;
@@ -603,11 +625,11 @@ button { font: inherit; }
   color: var(--ink); background: rgba(243,240,232,.95); cursor: pointer;
 }
 .method-flow {
-  display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0;
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0;
   margin: 28px 0; padding: 0; list-style: none;
 }
 .method-flow li {
-  position: relative; min-height: 118px; padding: 18px 12px;
+  position: relative; min-height: 250px; padding: 18px 16px;
   border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
 }
 .method-flow li:not(:last-child) { border-right: 1px solid var(--line); }
@@ -615,7 +637,16 @@ button { font: inherit; }
   content: "→"; position: absolute; top: 18px; right: -8px; z-index: 1;
   color: var(--gold); background: var(--paper); font-size: 14px;
 }
-.method-flow strong { display: block; color: var(--ink); font-size: 13px; line-height: 1.55; }
+.method-flow small { display: block; min-height: 32px; color: var(--green); font-size: 9px; font-weight: 800; letter-spacing: .08em; }
+.method-flow strong { display: block; margin: 8px 0 10px; color: var(--ink); font-family: var(--serif); font-size: 16px; line-height: 1.45; }
+.method-flow p { font-size: 12px !important; line-height: 1.75 !important; }
+.method-subtitle { color: var(--green) !important; font-size: 14px !important; font-weight: 700; letter-spacing: .03em; }
+.method-intro { margin-top: 5px !important; font-size: 13px !important; }
+.tool-principle { max-width: none !important; margin: -8px 0 24px !important; padding: 13px 17px; color: var(--ink) !important; border-left: 3px solid var(--gold); background: rgba(220,231,224,.42); font-weight: 650; }
+.document-lifecycle { margin-bottom: 24px; padding: 20px; border: 1px solid var(--line); }
+.document-lifecycle > div { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 13px 0; color: var(--ink); font-size: 12px; font-weight: 700; }
+.document-lifecycle > p:not(.case-label) { font-size: 12px !important; }
+.document-lifecycle strong { display: block; margin-top: 10px; color: var(--green); font-size: 13px; }
 .method-note { color: var(--ink) !important; font-family: var(--serif); font-size: 20px !important; }
 .ai-boundary-note {
   margin-top: 16px !important; padding: 16px 18px; border-left: 3px solid var(--gold);
@@ -941,10 +972,19 @@ button { font: inherit; }
   .issue-list article { grid-template-columns: 1fr; gap: 10px; }
   .issue-list dl { grid-column: auto; }
   .issue-list div { grid-template-columns: 1fr; gap: 5px; }
+  .confidentiality-case { padding: 22px 18px; }
+  .confidentiality-case header, .second-review { grid-template-columns: 1fr; gap: 12px; }
+  .confidentiality-case header .case-label { grid-row: auto; }
+  .reasoning-flow { grid-template-columns: 1fr; }
+  .reasoning-flow li, .reasoning-flow li:first-child, .reasoning-flow li:last-child { padding: 16px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .reasoning-flow li:last-child { border-bottom: 0; }
+  .review-path, .document-lifecycle > div { align-items: flex-start; flex-direction: column; }
+  .review-path i, .document-lifecycle i { transform: rotate(90deg); }
   .method-flow { grid-template-columns: 1fr; }
   .method-flow li {
     min-height: auto; padding: 16px 0; border-right: 0 !important; border-bottom: 1px solid var(--line);
   }
+  .method-flow small { min-height: 0; }
   .method-flow li:first-child { border-top: 1px solid var(--line); }
   .method-flow li:not(:last-child)::after { content: ""; display: none; }
   .related-tool { grid-template-columns: 1fr; align-items: start; gap: 22px; }

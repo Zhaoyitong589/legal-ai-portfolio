@@ -11,7 +11,7 @@ categories: ["legal-support", "in-house-legal", "cross-border", "legal-operation
 cover: "images/projects/cross-border-export/cover.svg"
 coverAlt: "跨境出口流程建设案例的档案式封面"
 coverCaption: "CBT—001：制造企业首次跨境出口流程建设案例。"
-updatedAt: "2026-07-18"
+updatedAt: "2026-08-16"
 riskNote: "本案例仅展示已脱敏的流程、方法和职责边界，不公开客户身份、联系方式、银行信息、合同金额、证书编号、报关编号、签名或印章。"
 projectDetails:
   painPoint: "制造企业首次直接开展海外业务时，内部缺少成熟外贸执行流程，合同、付款、技术、报关和沟通事项相互牵连。"

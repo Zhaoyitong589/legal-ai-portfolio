@@ -37,17 +37,18 @@ const keyCases = [
     action: '梳理双方诉求，提出以中国法为适用法律、CIETAC Hong Kong Arbitration Center 为仲裁机构、香港为仲裁地、英语为仲裁语言的折中方案，并通过英文邮件推进确认。'
   },
   {
-    label: '案例 B',
-    title: '保密信息定义',
-    problem: '对方主张只有明确标记为“Confidential”的信息才受保护，但实际业务中大量技术和商业信息可能通过邮件、图纸、讨论和图片交换，未必每次显式标记。',
-    action: '提出同时保护“明确标记的信息”和“根据性质、内容及披露情境应被合理理解为保密的信息”的表述。'
-  },
-  {
     label: '案例 C',
     title: '首次出口申报',
     problem: '首次接触国际贸易单一窗口，涉及企业信息、运输、包装、商品、监管和申报字段，且存在浏览器、证书和系统配置问题。',
     action: '拆分字段，查询官方说明，向专业人士确认不确定项，逐项验证，并记录操作步骤以便复用。'
   }
+];
+const confidentialitySteps = [
+  ['客户提出问题', '客户明确提出，只有标记为“Confidential”的信息才应受保护。这个异议起初并不是我特别关注的问题；过去参与的国内业务合同，也较少把识别标准细化到这一层。'],
+  ['识别实际风险', '客户反复强调后，我开始追问这一标准在实际信息流转中的后果：技术参数、图纸、报价、测试数据、产品设计和项目信息，可能因邮件、会议或即时通讯中的一次漏标而失去合同保护。'],
+  ['调用既有法律训练', '客户异议触发了 issue spotting。我联想到保护范围不应只依赖形式标签，以及可结合客观情境判断一方是否“应当知道”。这先形成了一个待验证的初步判断，而不是直接套用某一条法律规定。'],
+  ['查证与专业校准', '我检索类似 confidentiality drafting、核对常见定义方式并寻找遗漏；同时向技术人员确认会披露什么信息、如何流转，以及是否能现实地保证每次披露都单独标记。合同标准需要适应真实的信息流转方式。'],
+  ['形成可执行标准', '最终签署版本没有采用“未标记即不保护”的绝对标准，而是结合信息内容、性质和披露情境判断；同时通过 exclusions 排除已公开、事先合法掌握、从无保密义务第三方合法取得、独立开发及依法必须披露的信息。']
 ];
 const evidenceItems = [
   ['nnn-agreement-redacted.png', '已脱敏的双语 NNN 协议截图', '双语 NNN 协议：参与保密、禁止使用、禁止绕行条款修订'],
@@ -55,7 +56,13 @@ const evidenceItems = [
   ['sales-contract-redacted.png', '已脱敏的双语销售合同截图', '双语销售合同：处理交易主体、产品、付款与履约条款'],
   ['china-single-window-redacted.png', '已脱敏的中国国际贸易单一窗口截图', '出口申报系统：实际参与出口报关信息录入']
 ];
-const methodSteps = ['陌生问题', '拆分任务', '查询官方资料', '使用 AI 辅助', '咨询专业人士', '人工核验', '执行', '沉淀 SOP'];
+const methodSteps = [
+  ['SPOT', '快速识别问题', '依靠已有经验和法律训练捕捉异常点、权利义务不对称、潜在风险及可能路径。第一反应不是结论，而是一个需要继续验证的 highlight。'],
+  ['STRUCTURE', '把问题结构化', '把模糊的“不对劲”转化为具体问题：谁承担什么义务，风险如何分配，哪些事实和规则需要确认，以及业务最终需要什么判断。'],
+  ['VERIFY & EXPAND', '校准并寻找盲点', '使用法规与案例检索、法律数据库、Legal AI、通用 AI、开源工具和专业软件，验证第一判断的依据，并主动寻找反例、例外、遗漏风险和可复用方案。'],
+  ['CONSULT', '让专业事实回到专业人员', '涉及技术、财务、生产、物流、销售或 IT 时，不在纯法律层面推测；向对应人员确认真实流程、操作限制、商业目标与执行成本。'],
+  ['JUDGE & DOCUMENT', '形成判断并留下记录', '综合法律依据、工具结果、专业意见、业务目标、风险与成本形成建议，并保留最终文件、修改记录、争议点、决策依据、模板、SOP 和交接信息。']
+];
 ---
 
 <BaseLayout title={project.data.title} description={project.data.summary}>
@@ -148,6 +155,32 @@ const methodSteps = ['陌生问题', '拆分任务', '查询官方资料', '使�
               </article>
             ))}
           </div>
+          <article class="confidentiality-case" aria-labelledby="confidentiality-title">
+            <header>
+              <p class="case-label">CASE B</p>
+              <h3 id="confidentiality-title">当客户要求“未标 Confidential 即不保护”</h3>
+              <p>从客户异议，到法律判断，再到可执行的合同标准</p>
+            </header>
+            <ol class="reasoning-flow">
+              {confidentialitySteps.map(([title, text], index) => (
+                <li><span>{String(index + 1).padStart(2, '0')}</span><div><h4>{title}</h4><p>{text}</p></div></li>
+              ))}
+            </ol>
+            <blockquote>无论是否明确标记为 Confidential，只要根据信息的内容、性质或披露情境，一个合理主体应当理解其属于非公开信息，即纳入保密信息保护范围。</blockquote>
+            <p class="case-takeaway">真正需要解决的不是“要不要贴 Confidential 标签”，而是如何在保护敏感信息与确保义务边界可识别之间取得平衡。</p>
+          </article>
+          <aside class="second-review" aria-labelledby="second-review-title">
+            <div class="second-review-heading">
+              <p class="case-label">LEGAL TECH SECOND REVIEW</p>
+              <h3 id="second-review-title">工具作为第二双眼睛，而不是最终判断者</h3>
+              <div class="review-path" aria-label="审查路径"><span>Human Review</span><i>→</i><span>Legal Tech Second Review</span><i>→</i><span>Human Judgment</span></div>
+            </div>
+            <div>
+              <p>完成合同修改后，我使用法律科技产品进行第二轮审查。工具补充提示了返还与销毁、保密范围、禁止绕行、知识产权、违约责任，以及定义与条款间潜在冲突等第一轮未重点关注的风险。</p>
+              <p>这些输出不会被直接视为法律结论。例如，没有具体违约金不当然构成重大问题；未约定成果 IP 归属是否有风险，要看交易是否实际产生共同开发成果；风险等级也需放回交易目的和双方权利义务中判断。</p>
+              <strong>AI / Legal Tech 用于提高风险覆盖率、发现盲点和验证第一判断；最终判断仍由人基于法律、事实和业务目标完成。</strong>
+            </div>
+          </aside>
         </section>
 
         <section class="case-section" id="evidence-materials">
@@ -176,16 +209,25 @@ const methodSteps = ['陌生问题', '拆分任务', '查询官方资料', '使�
         <section class="case-section" id="working-method">
           <p class="section-index">06 / METHOD</p>
           <h2>我的工作方法</h2>
+          <p class="method-subtitle">From first signal to defensible judgment</p>
+          <p class="method-intro">从第一判断，到可验证、可执行、可沉淀的结论</p>
           <ol class="method-flow">
-            {methodSteps.map((step, index) => (
+            {methodSteps.map(([label, title, text], index) => (
               <li>
                 <span>{String(index + 1).padStart(2, '0')}</span>
-                <strong>{step}</strong>
+                <small>{label}</small><strong>{title}</strong><p>{text}</p>
               </li>
             ))}
           </ol>
+          <p class="tool-principle">工具不是替我判断，而是帮助我校准判断和扩大视野。</p>
+          <div class="document-lifecycle">
+            <p class="case-label">DOCUMENT LIFECYCLE</p>
+            <div aria-label="文件生命周期"><span>Initial Draft</span><i>→</i><span>Negotiation &amp; Redlines</span><i>→</i><span>Signed Version</span><i>→</i><span>Reusable Template</span></div>
+            <p>同时记录：争议点 · 修改原因 · 关键联系人 · 未完成事项 · Next Actions</p>
+            <strong>交接不是 transferring files，而是 transferring context。</strong>
+          </div>
           <p class="method-note">我不要求自己一开始掌握所有答案，而是要求自己建立一套能够可靠解决未知问题的方法。</p>
-          <p class="ai-boundary-note">AI 用于信息整理、初稿比较和问题拆解，不替代关键条款、申报数据及业务决策的人工核验。</p>
+          <p class="ai-boundary-note">对我来说，真正的 ownership 不是所有事情都自己完成，而是知道什么时候继续研究、什么时候使用工具、什么时候咨询专业人员，以及什么时候需要及时收束并形成判断。</p>
         </section>
 
         <section class="case-section" id="reflection">
